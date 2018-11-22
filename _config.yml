@@ -81,3 +81,12 @@ deploy:
   type: git
   repository: http://github.com/asdofe/asdofe.github.io.git
   branch: master
+
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
+    hub:
+    content:
+    content_limit:
+    content_limit_delim: ' '

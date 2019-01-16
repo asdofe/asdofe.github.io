@@ -27,7 +27,7 @@ a是以下code全add
 ---
 但是我覺得只有e比較麻煩，可能會遇到跟你想的不一樣的地方
 假設我今天有一個檔案叫做a.txt，我想add a.txt的某一個變更
-![](assets/Git一次add一行變更/git_partial_add_manual.PNG)
+![](https://imgur.com/9xkhynN.jpg)
 假設我這次只想要**add -456**那一行
 它上面寫
 ```sh

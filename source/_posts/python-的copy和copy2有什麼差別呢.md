@@ -5,7 +5,8 @@ tags:
 - python
 - develop
 ---
-#python 的copy和copy2有什麼差別呢
+
+# python 的copy和copy2有什麼差別呢
 
 ---
 

@@ -6,7 +6,8 @@ tags:
 - driver
 - adapter
 ---
-#arch linux no signal
+
+# arch linux no signal
 
 可惡的archi linux有夠爛連個顯卡驅動都不齊全
 

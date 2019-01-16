@@ -5,7 +5,8 @@ tags:
 - git
 - development
 ---
-#這篇是要說關於Git checkout style的問題
+
+# 這篇是要說關於Git checkout style的問題
 
 ![](/assets/擷取.PNG)
 

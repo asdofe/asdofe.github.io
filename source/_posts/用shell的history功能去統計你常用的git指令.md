@@ -5,7 +5,8 @@ tags:
 - git
 - shell
 ---
-#用shell script統計git 常用指令
+
+# 用shell script統計git 常用指令
 
 其實就是最近一個小報告啦
 

@@ -6,6 +6,7 @@ tags:
 - develop
 - c&c++
 ---
+
 ## 用C把檔案倒出來不要用"r" 請愛用"rb"
 
 # 由其是在Windows上面

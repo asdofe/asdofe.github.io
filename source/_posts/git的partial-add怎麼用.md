@@ -6,8 +6,7 @@ tags:
 - add
 - develop
 ---
-#
-Git一次add一行變更
+# Git一次add一行變更
 #### 我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。
 ---
 partial add是用互動式的方式，問你這一團code要怎麼處理

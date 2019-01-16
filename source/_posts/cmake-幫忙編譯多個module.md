@@ -6,8 +6,8 @@ tags:
 - c&c++
 - develop
 ---
-#
-CMake幫忙一次編好一堆Module順便幫忙編好執行檔
+
+# CMake幫忙一次編好一堆Module順便幫忙編好執行檔
 ---
 CMake真的很方便啊不用自己背一堆make還是gcc的狗屎指令
 

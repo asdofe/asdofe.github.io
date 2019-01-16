@@ -10,8 +10,8 @@ tags:
 - tmux
 - powerline
 ---
-#
-# 我真的不愛vim
+
+## 我真的不愛vim
 
 # 但是我更不愛把檔案丟來丟去
 

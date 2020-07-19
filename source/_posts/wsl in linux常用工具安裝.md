@@ -1,5 +1,5 @@
 ---
-title: linux 常用工具安裝
+title: wsl in linux 常用工具安裝
 date: 2020-06-04 14:42:39
 tags:
 	- linux

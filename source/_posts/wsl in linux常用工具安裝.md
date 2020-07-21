@@ -24,7 +24,7 @@ tags:
 
 ## 裝常用工具
 ```bash
-sudo apt-get update && sudo apt-get install -y curl tmux zsh silversearcher-ag git tree python3-pip vim htop openssh-server tig\
+sudo apt-get update && sudo apt-get install -y curl tmux zsh silversearcher-ag git tree python3-pip vim htop openssh-server tig virtualenvwrapper\
 && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 

@@ -45,28 +45,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://asdofe.github.io/2021/06/19/hello-world/"/>
-    <id>https://asdofe.github.io/2021/06/19/hello-world/</id>
-    <published>2021-06-19T15:14:43.411Z</published>
-    <updated>2021-06-19T15:14:43.411Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>自簽憑證self-signed certificate</title>
     <link href="https://asdofe.github.io/2020/07/17/%E8%87%AA%E7%B0%BD%E6%86%91%E8%AD%89self-signed%20certificate/"/>
     <id>https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/</id>
@@ -582,6 +560,32 @@
       <category term="rebase" scheme="https://asdofe.github.io/tags/rebase/"/>
     
       <category term="merge" scheme="https://asdofe.github.io/tags/merge/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用shell的history功能去統計你常用的git指令</title>
+    <link href="https://asdofe.github.io/2019/01/16/%E7%94%A8shell%E7%9A%84history%E5%8A%9F%E8%83%BD%E5%8E%BB%E7%B5%B1%E8%A8%88%E4%BD%A0%E5%B8%B8%E7%94%A8%E7%9A%84git%E6%8C%87%E4%BB%A4/"/>
+    <id>https://asdofe.github.io/2019/01/16/用shell的history功能去統計你常用的git指令/</id>
+    <published>2019-01-16T15:51:21.000Z</published>
+    <updated>2021-06-19T15:14:43.419Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="https://asdofe.github.io/tags/git/"/>
+    
+      <category term="shell" scheme="https://asdofe.github.io/tags/shell/"/>
     
   </entry>
   

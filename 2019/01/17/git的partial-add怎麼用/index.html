@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="Git一次add一行變更我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。 partial add是用互動式的方式，問你這一團code要怎麼處理使用方法如下1git add -p a.txt 輸入之後開啟互動模式1(Stage this hunk [y,">
+<meta name="keywords" content="develop,git,add">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的partial add怎麼用">
+<meta property="og:url" content="https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="Git一次add一行變更我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。 partial add是用互動式的方式，問你這一團code要怎麼處理使用方法如下1git add -p a.txt 輸入之後開啟互動模式1(Stage this hunk [y,">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://imgur.com/9xkhynN.jpg">
+<meta property="og:updated_time" content="2021-06-19T15:14:43.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git的partial add怎麼用">
+<meta name="twitter:description" content="Git一次add一行變更我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。 partial add是用互動式的方式，問你這一團code要怎麼處理使用方法如下1git add -p a.txt 輸入之後開啟互動模式1(Stage this hunk [y,">
+<meta name="twitter:image" content="https://imgur.com/9xkhynN.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>git的partial add怎麼用</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "top"="" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2019/01/17/fseek產生的一些毛/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2019/01/17/python-的copy和copy2有什麼差別呢/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&text=git的partial add怎麼用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&is_video=false&description=git的partial add怎麼用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git的partial add怎麼用&body=Check out this article: https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&name=git的partial add怎麼用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&t=git的partial add怎麼用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git一次add一行變更"><span class="toc-number">1.</span> <span class="toc-text">Git一次add一行變更</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#我們在用git-add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#是可以查詢這一堆指令代表什麼"><span class="toc-number">1.1.</span> <span class="toc-text">?是可以查詢這一堆指令代表什麼</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#不add-‘-‘那一行的話，把-變成’-‘-空白鍵"><span class="toc-number">1.1.0.0.1.</span> <span class="toc-text">不add ‘-‘那一行的話，把-變成’ ‘(空白鍵)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不add-‘-’那一行的話，把它們整行刪掉。"><span class="toc-number">1.1.0.0.2.</span> <span class="toc-text">不add ‘+’那一行的話，把它們整行刪掉。</span></a></li></ol></li>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        git的partial add怎麼用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-16T16:11:58.000Z" itemprop="datePublished">2019-01-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/add/">add</a>, <a class="tag-link" href="/tags/develop/">develop</a>, <a class="tag-link" href="/tags/git/">git</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Git一次add一行變更"><a href="#Git一次add一行變更" class="headerlink" title="Git一次add一行變更"></a>Git一次add一行變更</h1><h4 id="我們在用git-add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。"><a href="#我們在用git-add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。" class="headerlink" title="我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。"></a>我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。</h4><hr>
+<p>partial add是用互動式的方式，問你這一團code要怎麼處理<br>使用方法如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -p a.txt</span><br></pre></td></tr></table></figure></p>
+<p>輸入之後開啟互動模式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Stage this hunk [y,n,q,a,d,/,s,e,?]?)</span><br></pre></td></tr></table></figure></p>
+<p>y是這整團code都add<br>n是這整團code都不add<br>q是離開add模式<br>a是以下code全add<br><strong>e是把這團code抓出來一行一行手動add</strong></p>
+<h2 id="是可以查詢這一堆指令代表什麼"><a href="#是可以查詢這一堆指令代表什麼" class="headerlink" title="?是可以查詢這一堆指令代表什麼"></a>?是可以查詢這一堆指令代表什麼</h2><p>但是我覺得只有e比較麻煩，可能會遇到跟你想的不一樣的地方<br>假設我今天有一個檔案叫做a.txt，我想add a.txt的某一個變更<br><img src="https://imgur.com/9xkhynN.jpg" alt=""><br>假設我這次只想要<strong>add -456</strong>那一行<br>它上面寫<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\<span class="comment"># To remove '-'' lines, make them ' lines (context).</span></span><br><span class="line">\<span class="comment"># To remove '+' lines, delete them.</span></span><br></pre></td></tr></table></figure></p>
+<p>我的解釋是</p>
+<h5 id="不add-‘-‘那一行的話，把-變成’-‘-空白鍵"><a href="#不add-‘-‘那一行的話，把-變成’-‘-空白鍵" class="headerlink" title="不add ‘-‘那一行的話，把-變成’ ‘(空白鍵)"></a>不add ‘-‘那一行的話，把-變成’ ‘(空白鍵)</h5><h5 id="不add-‘-’那一行的話，把它們整行刪掉。"><a href="#不add-‘-’那一行的話，把它們整行刪掉。" class="headerlink" title="不add ‘+’那一行的話，把它們整行刪掉。"></a>不add ‘+’那一行的話，把它們整行刪掉。</h5><p>你如果隨便亂搞，比如說</p>
+<ol>
+<li>只拿掉-，沒有補一個空白回去，維持縮排</li>
+<li>只拿掉+，沒有整行刪掉</li>
+<li>你做了其他什麼神祕的修改<br>那你就會看到下面這一行。<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Your edited hunk does not apply. Edit again (saying <span class="string">"no"</span> discards!) [y/n]?</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>表示你的code通通沒有被add進去啊</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git一次add一行變更"><span class="toc-number">1.</span> <span class="toc-text">Git一次add一行變更</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#我們在用git-add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#是可以查詢這一堆指令代表什麼"><span class="toc-number">1.1.</span> <span class="toc-text">?是可以查詢這一堆指令代表什麼</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#不add-‘-‘那一行的話，把-變成’-‘-空白鍵"><span class="toc-number">1.1.0.0.1.</span> <span class="toc-text">不add ‘-‘那一行的話，把-變成’ ‘(空白鍵)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#不add-‘-’那一行的話，把它們整行刪掉。"><span class="toc-number">1.1.0.0.2.</span> <span class="toc-text">不add ‘+’那一行的話，把它們整行刪掉。</span></a></li></ol></li>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&text=git的partial add怎麼用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&is_video=false&description=git的partial add怎麼用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git的partial add怎麼用&body=Check out this article: https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&title=git的partial add怎麼用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&name=git的partial add怎麼用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/git的partial-add怎麼用/&t=git的partial add怎麼用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="description" content="流程 產生根金鑰 (root key) 產生根憑證 (root certificate) 產生中繼金鑰 (key) 產生中繼憑證請求 (csr) 用根金鑰簽憑證 把金鑰和憑證塞進https server並且重啟 把根憑證匯入chrome  細節 跑完會產生6個檔案 ca.key ca.crt host.key host.csr host.crt dn.conf ssl.conf    一般來說ca">
+<meta name="keywords" content="develop,linux,openssl,self-signed certificate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自簽憑證self-signed certificate">
+<meta property="og:url" content="https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="流程 產生根金鑰 (root key) 產生根憑證 (root certificate) 產生中繼金鑰 (key) 產生中繼憑證請求 (csr) 用根金鑰簽憑證 把金鑰和憑證塞進https server並且重啟 把根憑證匯入chrome  細節 跑完會產生6個檔案 ca.key ca.crt host.key host.csr host.crt dn.conf ssl.conf    一般來說ca">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2021-06-19T15:14:43.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自簽憑證self-signed certificate">
+<meta name="twitter:description" content="流程 產生根金鑰 (root key) 產生根憑證 (root certificate) 產生中繼金鑰 (key) 產生中繼憑證請求 (csr) 用根金鑰簽憑證 把金鑰和憑證塞進https server並且重啟 把根憑證匯入chrome  細節 跑完會產生6個檔案 ca.key ca.crt host.key host.csr host.crt dn.conf ssl.conf    一般來說ca">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>自簽憑證self-signed certificate</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2021/06/20/2021妹酒/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2020/06/05/Wakatime無法監控在vs-code上的檔案/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&text=自簽憑證self-signed certificate"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&is_video=false&description=自簽憑證self-signed certificate"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=自簽憑證self-signed certificate&body=Check out this article: https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&name=自簽憑證self-signed certificate&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&t=自簽憑證self-signed certificate"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#流程"><span class="toc-number">1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#細節"><span class="toc-number">2.</span> <span class="toc-text">細節</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        自簽憑證self-signed certificate
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">John Doe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-07-17T03:06:39.000Z" itemprop="datePublished">2020-07-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/develop/">develop</a>, <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/openssl/">openssl</a>, <a class="tag-link" href="/tags/self-signed-certificate/">self-signed certificate</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ol>
+<li>產生根金鑰 (root key)</li>
+<li>產生根憑證 (root certificate)</li>
+<li>產生中繼金鑰 (key)</li>
+<li>產生中繼憑證請求 (csr)</li>
+<li>用根金鑰簽憑證</li>
+<li>把金鑰和憑證塞進https server並且重啟</li>
+<li>把根憑證匯入chrome</li>
+</ol>
+<h1 id="細節"><a href="#細節" class="headerlink" title="細節"></a>細節</h1><ul>
+<li>跑完會產生6個檔案<ul>
+<li>ca.key</li>
+<li>ca.crt</li>
+<li>host.key</li>
+<li>host.csr</li>
+<li>host.crt</li>
+<li>dn.conf</li>
+<li>ssl.conf</li>
+</ul>
+</li>
+</ul>
+<p>一般來說ca.key和ca.crt保存起來用來產生下一次憑證，根憑證會上密碼</p>
+<p>但為了產生方便下面的code沒有幫根憑證上密碼</p>
+<p>如果有上密碼的會需要手動輸入4次密碼(ca.key產生的時候2次、ca.crt產生的時候1次和產生host.crt 1次)</p>
+<p>而host.key和host.crt就是真正會被拿來餵server的憑證和鑰匙</p>
+<p>記得改$DOMAINNAME設成自己的domain name<br>這個變數會填到[alt_names]底下的DNS.1<br>當然你用HOSTIP也是可以填一下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line">TESTDIR=asdofetestselfsignedcertificate</span><br><span class="line"><span class="keyword">if</span> [ -d <span class="variable">$TESTDIR</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"[Error] <span class="variable">$TESTDIR</span> already exists"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">mkdir <span class="variable">$TESTDIR</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$TESTDIR</span></span><br><span class="line"></span><br><span class="line">CERTIFICATE_AUTHORITY_KEY_PATH=ca.key</span><br><span class="line">CERTIFICATE_AUTHORITY_CRT_PATH=ca.crt</span><br><span class="line">HOST_KEY_PATH=host.key</span><br><span class="line">HOST_CSR_PATH=host.csr</span><br><span class="line">HOST_CRT_PATH=host.crt</span><br><span class="line">DN_CONF_PATH=dn.conf</span><br><span class="line">CERTIFICATE_CONF_PATH=ssl.conf</span><br><span class="line">DOMAINNAME=hellodomain.my</span><br><span class="line">HOSTIP=192.168.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment">## 產生根金鑰 (root key)</span></span><br><span class="line"><span class="comment"># 註解的部分是加密</span></span><br><span class="line"><span class="comment"># openssl genrsa -des3 -out $CERTIFICATE_AUTHORITY_KEY_PATH 2048</span></span><br><span class="line">openssl genrsa -out <span class="variable">$CERTIFICATE_AUTHORITY_KEY_PATH</span> 2048</span><br><span class="line"></span><br><span class="line"><span class="comment">## 產生根憑證 (root certificate)</span></span><br><span class="line">cat &gt; <span class="variable">$DN_CONF_PATH</span> &lt;&lt; EOF</span><br><span class="line">[req]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">prompt = no</span><br><span class="line"></span><br><span class="line">[req_distinguished_name]</span><br><span class="line">C = TW</span><br><span class="line">ST = Taiwan</span><br><span class="line">L = Taipei</span><br><span class="line">O = HELLO Inc.</span><br><span class="line">OU = HELLO Co., Ltd.</span><br><span class="line">CN = HELLOCo., Ltd.</span><br><span class="line">emailAddress=hello@hello.com</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">openssl req -x509 -new -nodes -key <span class="variable">$CERTIFICATE_AUTHORITY_KEY_PATH</span> -sha256 -days 3650 -config <span class="variable">$DN_CONF_PATH</span> -out <span class="variable">$CERTIFICATE_AUTHORITY_CRT_PATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 產生中繼金鑰 (key)</span></span><br><span class="line">openssl genrsa -out <span class="variable">$HOST_KEY_PATH</span> 2048</span><br><span class="line"></span><br><span class="line"><span class="comment">## 產生中繼憑證請求 (csr)</span></span><br><span class="line">openssl req -new -key <span class="variable">$HOST_KEY_PATH</span> -out <span class="variable">$HOST_CSR_PATH</span> -config <span class="variable">$DN_CONF_PATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 用根金鑰簽憑證</span></span><br><span class="line">cat &gt; <span class="variable">$CERTIFICATE_CONF_PATH</span> &lt;&lt; EOF</span><br><span class="line"></span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line">basicConstraints=CA:FALSE	</span><br><span class="line">keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line">[alt_names]</span><br><span class="line">DNS.1 = <span class="variable">$DOMAINNAME</span></span><br><span class="line">IP.1 = <span class="variable">$HOSTIP</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> <span class="variable">$HOST_CSR_PATH</span> -CA <span class="variable">$CERTIFICATE_AUTHORITY_CRT_PATH</span> -CAkey <span class="variable">$CERTIFICATE_AUTHORITY_KEY_PATH</span> -CAcreateserial \</span><br><span class="line">-out <span class="variable">$HOST_CRT_PATH</span> -days 825 -sha256 -extfile <span class="variable">$DN_CONF_PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'[Done]'</span></span><br></pre></td></tr></table></figure>
+<p>可以確認一下憑證上面的資料有沒有和預期不同<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> host.crt -text</span><br></pre></td></tr></table></figure></p>
+<p>把server設定檔設好重啟<br>再把host.crt匯入瀏覽器<br>https大功告成</p>
+<ul>
+<li>參考資料: <a href="https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/" target="_blank" rel="noopener">https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#流程"><span class="toc-number">1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#細節"><span class="toc-number">2.</span> <span class="toc-text">細節</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&text=自簽憑證self-signed certificate"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&is_video=false&description=自簽憑證self-signed certificate"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=自簽憑證self-signed certificate&body=Check out this article: https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&title=自簽憑證self-signed certificate"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&name=自簽憑證self-signed certificate&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2020/07/17/自簽憑證self-signed certificate/&t=自簽憑證self-signed certificate"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2021
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

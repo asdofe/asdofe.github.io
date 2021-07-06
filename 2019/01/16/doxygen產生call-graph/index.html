@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="description" content="當初trace code有點障礙，想要手動畫call graph，trace了幾行便想放棄，找找看有沒有什麼東西可以幫忙印call graph的。 剛好找到老朋友doxygen，原來他可以幫忙印call graph啊真是太好惹。   下載並安裝doxygen本人(我是抓人家編好的binary下來，windows 安裝好還有doxywizard，把設定過程整個精靈化，非常厲害實在是簡單易用啊) ht">
-<meta name="keywords" content="doxygen,develop,software,c&amp;c++">
+<meta name="keywords" content="c&amp;c++,develop,doxygen,software">
 <meta property="og:type" content="article">
 <meta property="og:title" content="doxygen產生call graph">
 <meta property="og:url" content="https://asdofe.github.io/2019/01/16/doxygen產生call-graph/index.html">
@@ -261,7 +261,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -272,7 +272,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
+      e.trigger.setAttribute('aria-label', "Kopiert!");
       e.clearSelection();
     })
   })

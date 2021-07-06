@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="description" content="用C把檔案倒出來不要用”r” 請愛用”rb”由其是在Windows上面 問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了 以下錯誤示範1234567FILE* fp = foepn(my_file, &amp;quot;r&amp;quot;);fseek(fp, 0, SEEK_END);int file_len = ftell(fp);char buf[100">
-<meta name="keywords" content="c&amp;c++,develop,fseek">
+<meta name="keywords" content="develop,c&amp;c++,fseek">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fseek產生的一些毛">
 <meta property="og:url" content="https://asdofe.github.io/2019/01/17/fseek產生的一些毛/index.html">
@@ -261,7 +261,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -272,7 +272,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.trigger.setAttribute('aria-label', "Copied!");
       e.clearSelection();
     })
   })

@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="description" content="CMake幫忙一次編好一堆Module順便幫忙編好執行檔 CMake真的很方便啊不用自己背一堆make還是gcc的狗屎指令 就可以幫忙編出不論是.a還是.so都可以，而且還不用自己手動copy一堆include的path(好啦嚴格來說他也只是幫忙gen Makefile) 這麼牛逼得tool我實在是不明白為何聲勢還是不如makefile 這邊提示一下 ref1的那個範例需要確保out-of-sou">
-<meta name="keywords" content="cmake,c&amp;c++,develop">
+<meta name="keywords" content="develop,c&amp;c++,cmake">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cmake 幫忙編譯多個module">
 <meta property="og:url" content="https://asdofe.github.io/2019/01/16/cmake-幫忙編譯多個module/index.html">
@@ -265,7 +265,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -276,7 +276,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.trigger.setAttribute('aria-label', "Copied!");
       e.clearSelection();
     })
   })

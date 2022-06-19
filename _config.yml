@@ -79,7 +79,7 @@ theme: cactus
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: http://github.com/asdofe/asdofe.github.io.git
+  repository: git@github.com:asdofe/asdofe.github.io.git
   branch: master
 
 feed:

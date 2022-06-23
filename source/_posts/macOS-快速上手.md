@@ -46,6 +46,7 @@ brew install --cask microsoft-edge
 brew install --cask calibre
 brew install --cask bingpaper
 brew install --cask visual-studio-code
+brew install --cask macfuse
 ```
 
 ## 開發者工具
@@ -106,6 +107,24 @@ cd ..
 rm -rf fonts
 ```
 
+* diff-so-fancy
+    * 已經用Homebrew裝好了
+    * 需要設定git global config
+
+```shell
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global interactive.diffFilter "diff-so-fancy --patch"
+```
+
+* [macFUSE & sshFS](https://github.com/telepresenceio/telepresence/issues/1654#issuecomment-873538291)
+    * 會需要關機，再長按開機鍵，跳出安全選單，降低安全層級
+    * 進到作業系統內後，mount到一半會需要再授權macFUSE的開發者
+    * mount point放在家目錄不用root權限
+
+```shell
+# 掛載指令
+sshfs -o allow_other,default_permissions <remote site>:<remote directory path> <local directory path>
+```
 
 ## 快速鍵
 * 全選 還原 剪下 複製 貼上：Command + a z x c v 
@@ -125,6 +144,7 @@ rm -rf fonts
 * Spotlight：Command + 空白鍵
 * 大部分的分頁切換：Control + Tab
 * 關閉程式：Command + q
+* 關閉視窗：Ｃommand + shift + w
 * 關閉分頁：Ｃommand + w
 * APP切換(很爛)：Command + Tab
 * APP切換(第三方AltTab提供)：Option + Tab

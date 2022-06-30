@@ -47,6 +47,8 @@ brew install --cask calibre
 brew install --cask bingpaper
 brew install --cask visual-studio-code
 brew install --cask macfuse
+brew install --cask vlc
+brew install --cask mcbopomofo
 ```
 
 ## 開發者工具
@@ -116,7 +118,7 @@ git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global interactive.diffFilter "diff-so-fancy --patch"
 ```
 
-* [macFUSE & sshFS](https://github.com/telepresenceio/telepresence/issues/1654#issuecomment-873538291)
+* 傳輸速度有夠慢不推 <del>[macFUSE & sshFS](https://github.com/telepresenceio/telepresence/issues/1654#issuecomment-873538291)</del>
     * 會需要關機，再長按開機鍵，跳出安全選單，降低安全層級
     * 進到作業系統內後，mount到一半會需要再授權macFUSE的開發者
     * mount point放在家目錄不用root權限

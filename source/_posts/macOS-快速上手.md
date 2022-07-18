@@ -165,7 +165,9 @@ sshfs -o allow_other,default_permissions <remote site>:<remote directory path> <
 ## macOS預設設定調整
 1. 系統偏好設定 > 觸碰式軌跡板
     * (分頁：點按) > 點一下來選按 打勾
-    * (分頁：捲動與縮放) > 捲動方向：自然 取消打勾
+    * (分頁：捲動與縮放)
+        * 捲動方向：自然 取消打勾
+        * 智慧型縮放：取消打勾
 2. 系統偏好設定 > 鍵盤 > (分頁：鍵盤) > 快速鍵
     * 將螢幕圖片儲存為檔案 和 拷貝螢幕圖片至剪貼板 的快速鍵 對調
     * 將所選區域的圖片儲存為檔案 和 拷貝所選區域的圖片至剪貼板 對調
@@ -177,3 +179,5 @@ sshfs -o allow_other,default_permissions <remote site>:<remote directory path> <
 5. 系統偏好設定 > 一般
     * 外觀：深色
     * 預設網頁瀏覽器：Microsoft Edge
+6. 系統偏好設定 > 輔助使用
+    * 動作 > 指標控制 > 觸控式軌跡版選項...: 啟用托移 取消打勾

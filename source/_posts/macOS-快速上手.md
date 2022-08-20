@@ -50,6 +50,7 @@ brew install --cask macfuse
 brew install --cask vlc
 brew install --cask mcbopomofo
 brew install --cask aldente
+brew install --cask topnotch
 ```
 
 ## 開發者工具

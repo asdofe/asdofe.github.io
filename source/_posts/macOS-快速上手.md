@@ -7,6 +7,11 @@ tags:
 - script
 ---
 
+想看更新了什麼麻煩自己看git log惹
+https://github.com/asdofe/asdofe.github.io/tree/hexo
+2022/12/11 update.
+
+
 # 第三方軟體和設定與快速鍵
 * 有一些Windows設計比較好的
 * 有一些是順手的設定
@@ -36,21 +41,16 @@ brew install tig
 brew install --cask alfred
 brew install --cask alt-tab
 brew install --cask appcleaner
-brew install --cask cheatsheet
 brew install --cask iterm2
-brew install --cask spectable
 brew install --cask stats
 brew install --cask spotify
 brew install --cask microsoft-teams
 brew install --cask microsoft-edge
 brew install --cask calibre
-brew install --cask bingpaper
 brew install --cask visual-studio-code
-brew install --cask macfuse
 brew install --cask vlc
 brew install --cask mcbopomofo
 brew install --cask aldente
-brew install --cask topnotch
 ```
 
 ## 開發者工具
@@ -68,7 +68,7 @@ nvm use node
 * [z - jump around](https://github.com/rupa/z)
 ```shell
 cd ${ZDOTDIR:-$HOME}
-git clone git@github.com:rupa/z.git
+git clone https://github.com/rupa/z.git
 echo '. z/z.sh' >> ${ZDOTDIR:-$HOME}/.zshrc
 ```
 
@@ -80,7 +80,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 * [z-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
 
 ```shell
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
 * [z-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh)

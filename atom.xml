@@ -6,7 +6,7 @@
   <link href="https://asdofe.github.io/atom.xml" rel="self"/>
   
   <link href="https://asdofe.github.io/"/>
-  <updated>2022-12-11T09:21:37.653Z</updated>
+  <updated>2023-02-14T16:14:00.090Z</updated>
   <id>https://asdofe.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Macbook Pro 14安裝Windows的虛擬機</title>
+    <link href="https://asdofe.github.io/2023/02/14/%E5%9C%A8Macbook-Pro-14%E5%AE%89%E8%A3%9DWindows%E7%9A%84%E8%99%9B%E6%93%AC%E6%A9%9F/"/>
+    <id>https://asdofe.github.io/2023/02/14/%E5%9C%A8Macbook-Pro-14%E5%AE%89%E8%A3%9DWindows%E7%9A%84%E8%99%9B%E6%93%AC%E6%A9%9F/</id>
+    <published>2023-02-14T15:48:35.000Z</published>
+    <updated>2023-02-14T16:14:00.090Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+    <category term="macos" scheme="https://asdofe.github.io/tags/macos/"/>
+    
+    <category term="arm64" scheme="https://asdofe.github.io/tags/arm64/"/>
+    
+    <category term="windows" scheme="https://asdofe.github.io/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>macOS 快速上手</title>
@@ -301,15 +328,15 @@
     
     
     
-    <category term="2019" scheme="https://asdofe.github.io/tags/2019/"/>
-    
     <category term="日本" scheme="https://asdofe.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
+    
+    <category term="旅遊" scheme="https://asdofe.github.io/tags/%E6%97%85%E9%81%8A/"/>
+    
+    <category term="2019" scheme="https://asdofe.github.io/tags/2019/"/>
     
     <category term="關東" scheme="https://asdofe.github.io/tags/%E9%97%9C%E6%9D%B1/"/>
     
     <category term="東京" scheme="https://asdofe.github.io/tags/%E6%9D%B1%E4%BA%AC/"/>
-    
-    <category term="旅遊" scheme="https://asdofe.github.io/tags/%E6%97%85%E9%81%8A/"/>
     
     <category term="河口湖" scheme="https://asdofe.github.io/tags/%E6%B2%B3%E5%8F%A3%E6%B9%96/"/>
     
@@ -338,9 +365,9 @@
     
     <category term="develop" scheme="https://asdofe.github.io/tags/develop/"/>
     
-    <category term="network" scheme="https://asdofe.github.io/tags/network/"/>
-    
     <category term="windows" scheme="https://asdofe.github.io/tags/windows/"/>
+    
+    <category term="network" scheme="https://asdofe.github.io/tags/network/"/>
     
   </entry>
   
@@ -358,15 +385,15 @@
     
     
     
-    <category term="日本" scheme="https://asdofe.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
-    
-    <category term="旅遊" scheme="https://asdofe.github.io/tags/%E6%97%85%E9%81%8A/"/>
-    
     <category term="2018" scheme="https://asdofe.github.io/tags/2018/"/>
+    
+    <category term="日本" scheme="https://asdofe.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
     
     <category term="九州" scheme="https://asdofe.github.io/tags/%E4%B9%9D%E5%B7%9E/"/>
     
     <category term="博多" scheme="https://asdofe.github.io/tags/%E5%8D%9A%E5%A4%9A/"/>
+    
+    <category term="旅遊" scheme="https://asdofe.github.io/tags/%E6%97%85%E9%81%8A/"/>
     
     <category term="由布院" scheme="https://asdofe.github.io/tags/%E7%94%B1%E5%B8%83%E9%99%A2/"/>
     
@@ -533,31 +560,6 @@
     <category term="linux" scheme="https://asdofe.github.io/tags/linux/"/>
     
     <category term="usb" scheme="https://asdofe.github.io/tags/usb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rsync小筆記</title>
-    <link href="https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/"/>
-    <id>https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/</id>
-    <published>2019-01-16T16:08:51.000Z</published>
-    <updated>2022-12-11T09:13:10.964Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    
-    <category term="develop" scheme="https://asdofe.github.io/tags/develop/"/>
-    
-    <category term="rsync" scheme="https://asdofe.github.io/tags/rsync/"/>
     
   </entry>
   

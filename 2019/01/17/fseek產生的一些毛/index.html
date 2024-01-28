@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"asdofe.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="用C把檔案倒出來不要用”r” 請愛用”rb”由其是在Windows上面 問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了 以下錯誤示範 1234567FILE* fp &#x3D; foepn(my_file, &quot;r&quot;);fseek(fp, 0, SEEK_END);int file_len &#x3D; ftell(fp);char buf[10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fseek產生的一些毛">
+<meta property="og:url" content="https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="用C把檔案倒出來不要用”r” 請愛用”rb”由其是在Windows上面 問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了 以下錯誤示範 1234567FILE* fp &#x3D; foepn(my_file, &quot;r&quot;);fseek(fp, 0, SEEK_END);int file_len &#x3D; ftell(fp);char buf[10">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-01-16T16:13:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T10:37:41.270Z">
+<meta property="article:author" content="asdofe">
+<meta property="article:tag" content="c&amp;c++">
+<meta property="article:tag" content="develop">
+<meta property="article:tag" content="fseek">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/","path":"2019/01/17/fseek產生的一些毛/","title":"fseek產生的一些毛"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>fseek產生的一些毛 | 隨便說說</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="隨便說說" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">隨便說說</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8C%E6%8A%8A%E6%AA%94%E6%A1%88%E5%80%92%E5%87%BA%E4%BE%86%E4%B8%8D%E8%A6%81%E7%94%A8%E2%80%9Dr%E2%80%9D-%E8%AB%8B%E6%84%9B%E7%94%A8%E2%80%9Drb%E2%80%9D"><span class="nav-number">1.</span> <span class="nav-text">用C把檔案倒出來不要用”r” 請愛用”rb”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B1%E5%85%B6%E6%98%AF%E5%9C%A8Windows%E4%B8%8A%E9%9D%A2"><span class="nav-number"></span> <span class="nav-text">由其是在Windows上面</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">asdofe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="asdofe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="隨便說說">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="fseek產生的一些毛 | 隨便說說">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          fseek產生的一些毛
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-01-17 00:13:00" itemprop="dateCreated datePublished" datetime="2019-01-17T00:13:00+08:00">2019-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 18:37:41" itemprop="dateModified" datetime="2024-01-28T18:37:41+08:00">2024-01-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="用C把檔案倒出來不要用”r”-請愛用”rb”"><a href="#用C把檔案倒出來不要用”r”-請愛用”rb”" class="headerlink" title="用C把檔案倒出來不要用”r” 請愛用”rb”"></a>用C把檔案倒出來不要用”r” 請愛用”rb”</h2><h1 id="由其是在Windows上面"><a href="#由其是在Windows上面" class="headerlink" title="由其是在Windows上面"></a>由其是在Windows上面</h1><hr>
+<p>問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了</p>
+<p>以下錯誤示範</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FILE* fp = foepn(my_file, &quot;r&quot;);</span><br><span class="line">fseek(fp, 0, SEEK_END);</span><br><span class="line">int file_len = ftell(fp);</span><br><span class="line">char buf[1000] = &#123;0&#125;;</span><br><span class="line">fread(buf, sizeof(char), file_len, fp);</span><br><span class="line">buf[file_len] = &#x27;\0&#x27;;</span><br><span class="line">printf(&quot;%s\n&quot;, buf);</span><br></pre></td></tr></table></figure>
+<p>如果有印出一些奇怪的東西應該還算正常</p>
+<p>根據我的實驗也不是每一個檔案都會出錯，但是特別容易在換行比較多的檔案上，所以合理懷疑戰犯就是OS幫我加料啦<br>真的是生77你沒事g婆3小，害我花超多時間debug到底是哪個環節出錯</p>
+<p>所以沒事不要用”r”請愛用”rb”(我真的是不知道”r”是設計來幹嘛的)</p>
+<hr>
+<p>後記：<a target="_blank" rel="noopener" href="https://www.securecoding.cert.org/confluence/display/c/FIO19-C.+Do+not+use+fseek%28%29+and+ftell%28%29+to+compute+the+size+of+a+regular+file">Coding Std</a> 這個文件雖然沒用到但是當做增廣見聞有病治病沒病強身啦。(這年頭工程師真的是知道越多寫code越抖越心虛QQ)</p>
+<p>ps:這篇打完才發現跟fseek一點關係也沒有阿，fseek只是non-portable而已並不是這篇文章的戰犯啦不好意思誤會一場，標題下得不好請多包涵QQ。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/c-c/" rel="tag"># c&c++</a>
+              <a href="/tags/develop/" rel="tag"># develop</a>
+              <a href="/tags/fseek/" rel="tag"># fseek</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/17/git%E7%9A%84partial-add%E6%80%8E%E9%BA%BC%E7%94%A8/" rel="prev" title="git的partial add怎麼用">
+                  <i class="fa fa-angle-left"></i> git的partial add怎麼用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/17/arch-linux-%E9%80%B2%E5%85%A5bootloader%E4%B9%8B%E5%BE%8C%E5%AE%8C%E5%85%A8%E6%B2%92%E6%9C%89%E7%95%AB%E9%9D%A2/" rel="next" title="arch linux 進入bootloader之後完全沒有畫面">
+                  arch linux 進入bootloader之後完全沒有畫面 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">asdofe</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"asdofe","repo":null,"client_id":"ac257065dfffcf0a08e2","client_secret":"77d0fdcd3f870d9f7236a137d674c569a2441a04","admin_user":"asdofe","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-TW","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"f8a444b9f74f048d70d565047c1ba79f"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

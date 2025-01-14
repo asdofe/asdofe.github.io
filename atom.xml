@@ -69,7 +69,7 @@
     <link href="https://asdofe.github.io/2024/05/18/2023-%E6%B1%97%E7%9A%B0%E7%96%B9%E5%AF%8C%E8%B2%B4%E6%89%8B%E7%9A%84%E5%BA%B7%E5%BE%A9%E5%BF%83%E5%BE%97/"/>
     <id>https://asdofe.github.io/2024/05/18/2023-%E6%B1%97%E7%9A%B0%E7%96%B9%E5%AF%8C%E8%B2%B4%E6%89%8B%E7%9A%84%E5%BA%B7%E5%BE%A9%E5%BF%83%E5%BE%97/</id>
     <published>2024-05-18T07:52:58.000Z</published>
-    <updated>2025-01-14T03:56:26.874Z</updated>
+    <updated>2025-01-14T08:14:42.331Z</updated>
     
     
       
@@ -92,7 +92,7 @@
     <link href="https://asdofe.github.io/2024/05/18/2024-%E3%83%A8%E3%83%AB%E3%82%B7%E3%82%AB-Live-%E6%9C%88%E3%81%A8%E7%8C%AB%E3%81%AE%E3%83%80%E3%83%B3%E3%82%B9/"/>
     <id>https://asdofe.github.io/2024/05/18/2024-%E3%83%A8%E3%83%AB%E3%82%B7%E3%82%AB-Live-%E6%9C%88%E3%81%A8%E7%8C%AB%E3%81%AE%E3%83%80%E3%83%B3%E3%82%B9/</id>
     <published>2024-05-18T07:34:11.000Z</published>
-    <updated>2025-01-14T03:56:26.875Z</updated>
+    <updated>2025-01-14T08:41:04.719Z</updated>
     
     
       
@@ -107,6 +107,8 @@
     
     
     <category term="日本" scheme="https://asdofe.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
+    
+    <category term="關東" scheme="https://asdofe.github.io/tags/%E9%97%9C%E6%9D%B1/"/>
     
     <category term="東京" scheme="https://asdofe.github.io/tags/%E6%9D%B1%E4%BA%AC/"/>
     
@@ -177,7 +179,7 @@
     <link href="https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/"/>
     <id>https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/</id>
     <published>2023-06-25T02:40:29.000Z</published>
-    <updated>2025-01-14T03:56:26.874Z</updated>
+    <updated>2025-01-14T08:53:01.347Z</updated>
     
     
       
@@ -193,13 +195,9 @@
     
     <category term="windows" scheme="https://asdofe.github.io/tags/windows/"/>
     
-    <category term="pc" scheme="https://asdofe.github.io/tags/pc/"/>
-    
     <category term="nvidia" scheme="https://asdofe.github.io/tags/nvidia/"/>
     
     <category term="intel" scheme="https://asdofe.github.io/tags/intel/"/>
-    
-    <category term="itx" scheme="https://asdofe.github.io/tags/itx/"/>
     
   </entry>
   
@@ -208,7 +206,7 @@
     <link href="https://asdofe.github.io/2023/02/14/%E5%9C%A8Macbook-Pro-14%E5%AE%89%E8%A3%9DWindows%E7%9A%84%E8%99%9B%E6%93%AC%E6%A9%9F/"/>
     <id>https://asdofe.github.io/2023/02/14/%E5%9C%A8Macbook-Pro-14%E5%AE%89%E8%A3%9DWindows%E7%9A%84%E8%99%9B%E6%93%AC%E6%A9%9F/</id>
     <published>2023-02-14T15:48:35.000Z</published>
-    <updated>2024-01-28T10:37:41.272Z</updated>
+    <updated>2025-01-14T08:30:24.767Z</updated>
     
     
       
@@ -224,7 +222,7 @@
     
     <category term="windows" scheme="https://asdofe.github.io/tags/windows/"/>
     
-    <category term="macos" scheme="https://asdofe.github.io/tags/macos/"/>
+    <category term="apple" scheme="https://asdofe.github.io/tags/apple/"/>
     
     <category term="arm64" scheme="https://asdofe.github.io/tags/arm64/"/>
     
@@ -235,7 +233,7 @@
     <link href="https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"/>
     <id>https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/</id>
     <published>2022-06-22T14:04:46.000Z</published>
-    <updated>2024-01-28T10:37:41.271Z</updated>
+    <updated>2025-01-14T08:43:05.261Z</updated>
     
     
       
@@ -249,11 +247,11 @@
     
     
     
-    <category term="dev" scheme="https://asdofe.github.io/tags/dev/"/>
+    <category term="apple" scheme="https://asdofe.github.io/tags/apple/"/>
     
-    <category term="macos" scheme="https://asdofe.github.io/tags/macos/"/>
+    <category term="開發" scheme="https://asdofe.github.io/tags/%E9%96%8B%E7%99%BC/"/>
     
-    <category term="script" scheme="https://asdofe.github.io/tags/script/"/>
+    <category term="note" scheme="https://asdofe.github.io/tags/note/"/>
     
   </entry>
   
@@ -262,7 +260,7 @@
     <link href="https://asdofe.github.io/2022/06/19/Macbook-Pro-14%E6%8E%A1%E8%B3%BC%E7%AD%96%E7%95%A5/"/>
     <id>https://asdofe.github.io/2022/06/19/Macbook-Pro-14%E6%8E%A1%E8%B3%BC%E7%AD%96%E7%95%A5/</id>
     <published>2022-06-19T12:46:33.000Z</published>
-    <updated>2024-01-28T10:37:41.270Z</updated>
+    <updated>2025-01-14T08:30:00.717Z</updated>
     
     
       
@@ -276,11 +274,7 @@
     
     
     
-    <category term="review" scheme="https://asdofe.github.io/tags/review/"/>
-    
     <category term="apple" scheme="https://asdofe.github.io/tags/apple/"/>
-    
-    <category term="mac" scheme="https://asdofe.github.io/tags/mac/"/>
     
   </entry>
   
@@ -289,7 +283,7 @@
     <link href="https://asdofe.github.io/2022/06/07/%E8%AD%B7%E6%89%8B%E9%9C%9C%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
     <id>https://asdofe.github.io/2022/06/07/%E8%AD%B7%E6%89%8B%E9%9C%9C%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</id>
     <published>2022-06-07T09:04:02.000Z</published>
-    <updated>2024-01-28T10:37:41.273Z</updated>
+    <updated>2025-01-14T08:10:47.977Z</updated>
     
     
       
@@ -303,11 +297,7 @@
     
     
     
-    <category term="review" scheme="https://asdofe.github.io/tags/review/"/>
-    
-    <category term="hand" scheme="https://asdofe.github.io/tags/hand/"/>
-    
-    <category term="medicine" scheme="https://asdofe.github.io/tags/medicine/"/>
+    <category term="健康" scheme="https://asdofe.github.io/tags/%E5%81%A5%E5%BA%B7/"/>
     
   </entry>
   
@@ -316,7 +306,7 @@
     <link href="https://asdofe.github.io/2021/06/20/2021%E5%A6%B9%E9%85%92/"/>
     <id>https://asdofe.github.io/2021/06/20/2021%E5%A6%B9%E9%85%92/</id>
     <published>2021-06-19T17:37:03.000Z</published>
-    <updated>2024-01-28T10:37:41.270Z</updated>
+    <updated>2025-01-14T08:40:22.467Z</updated>
     
     
       
@@ -332,10 +322,6 @@
     
     <category term="酒" scheme="https://asdofe.github.io/tags/%E9%85%92/"/>
     
-    <category term="食物" scheme="https://asdofe.github.io/tags/%E9%A3%9F%E7%89%A9/"/>
-    
-    <category term="心得" scheme="https://asdofe.github.io/tags/%E5%BF%83%E5%BE%97/"/>
-    
   </entry>
   
   <entry>
@@ -343,7 +329,7 @@
     <link href="https://asdofe.github.io/2020/07/17/%E8%87%AA%E7%B0%BD%E6%86%91%E8%AD%89self-signed%20certificate/"/>
     <id>https://asdofe.github.io/2020/07/17/%E8%87%AA%E7%B0%BD%E6%86%91%E8%AD%89self-signed%20certificate/</id>
     <published>2020-07-17T03:06:39.000Z</published>
-    <updated>2024-01-28T10:37:41.273Z</updated>
+    <updated>2025-01-14T08:38:30.240Z</updated>
     
     
       
@@ -357,13 +343,9 @@
     
     
     
-    <category term="develop" scheme="https://asdofe.github.io/tags/develop/"/>
-    
     <category term="linux" scheme="https://asdofe.github.io/tags/linux/"/>
     
-    <category term="openssl" scheme="https://asdofe.github.io/tags/openssl/"/>
-    
-    <category term="self-signed certificate" scheme="https://asdofe.github.io/tags/self-signed-certificate/"/>
+    <category term="開發" scheme="https://asdofe.github.io/tags/%E9%96%8B%E7%99%BC/"/>
     
   </entry>
   
@@ -372,7 +354,7 @@
     <link href="https://asdofe.github.io/2020/06/05/Wakatime%E7%84%A1%E6%B3%95%E7%9B%A3%E6%8E%A7%E5%9C%A8vs-code%E4%B8%8A%E7%9A%84%E6%AA%94%E6%A1%88/"/>
     <id>https://asdofe.github.io/2020/06/05/Wakatime%E7%84%A1%E6%B3%95%E7%9B%A3%E6%8E%A7%E5%9C%A8vs-code%E4%B8%8A%E7%9A%84%E6%AA%94%E6%A1%88/</id>
     <published>2020-06-05T10:39:36.000Z</published>
-    <updated>2024-01-28T10:37:41.270Z</updated>
+    <updated>2025-01-14T08:34:14.955Z</updated>
     
     
       
@@ -385,8 +367,6 @@
     
     
     
-    
-    <category term="wakatime" scheme="https://asdofe.github.io/tags/wakatime/"/>
     
     <category term="vscode" scheme="https://asdofe.github.io/tags/vscode/"/>
     
@@ -397,7 +377,7 @@
     <link href="https://asdofe.github.io/2020/06/05/vdi%E6%AA%94%E5%A4%AA%E8%82%A5/"/>
     <id>https://asdofe.github.io/2020/06/05/vdi%E6%AA%94%E5%A4%AA%E8%82%A5/</id>
     <published>2020-06-05T05:06:51.000Z</published>
-    <updated>2024-01-28T10:37:41.271Z</updated>
+    <updated>2025-01-14T08:54:12.963Z</updated>
     
     
       
@@ -411,13 +391,7 @@
     
     
     
-    <category term="virtualbox" scheme="https://asdofe.github.io/tags/virtualbox/"/>
-    
-    <category term="vdi" scheme="https://asdofe.github.io/tags/vdi/"/>
-    
-    <category term="dd" scheme="https://asdofe.github.io/tags/dd/"/>
-    
-    <category term="treesize" scheme="https://asdofe.github.io/tags/treesize/"/>
+    <category term="開發" scheme="https://asdofe.github.io/tags/%E9%96%8B%E7%99%BC/"/>
     
   </entry>
   
@@ -447,7 +421,7 @@
     <link href="https://asdofe.github.io/2020/06/04/wsl%20in%20linux%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D/"/>
     <id>https://asdofe.github.io/2020/06/04/wsl%20in%20linux%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%9D/</id>
     <published>2020-06-04T06:42:39.000Z</published>
-    <updated>2024-01-28T10:37:41.271Z</updated>
+    <updated>2025-01-14T08:51:01.407Z</updated>
     
     
       
@@ -461,25 +435,11 @@
     
     
     
-    <category term="develop" scheme="https://asdofe.github.io/tags/develop/"/>
-    
     <category term="linux" scheme="https://asdofe.github.io/tags/linux/"/>
     
-    <category term="zsh" scheme="https://asdofe.github.io/tags/zsh/"/>
+    <category term="開發" scheme="https://asdofe.github.io/tags/%E9%96%8B%E7%99%BC/"/>
     
-    <category term="oh-my-zsh" scheme="https://asdofe.github.io/tags/oh-my-zsh/"/>
-    
-    <category term="ssh" scheme="https://asdofe.github.io/tags/ssh/"/>
-    
-    <category term="git-cz" scheme="https://asdofe.github.io/tags/git-cz/"/>
-    
-    <category term="ag" scheme="https://asdofe.github.io/tags/ag/"/>
-    
-    <category term="tree" scheme="https://asdofe.github.io/tags/tree/"/>
-    
-    <category term="tmux" scheme="https://asdofe.github.io/tags/tmux/"/>
-    
-    <category term="wsl" scheme="https://asdofe.github.io/tags/wsl/"/>
+    <category term="note" scheme="https://asdofe.github.io/tags/note/"/>
     
   </entry>
   
@@ -501,7 +461,7 @@
     <link href="https://asdofe.github.io/2019/06/06/2019%E5%A4%8F%E6%97%A5%E6%9D%B1%E4%BA%AC%E4%BA%94%E5%A4%A9%E5%9B%9B%E5%A4%9C/"/>
     <id>https://asdofe.github.io/2019/06/06/2019%E5%A4%8F%E6%97%A5%E6%9D%B1%E4%BA%AC%E4%BA%94%E5%A4%A9%E5%9B%9B%E5%A4%9C/</id>
     <published>2019-06-05T16:40:08.000Z</published>
-    <updated>2024-01-28T10:37:41.269Z</updated>
+    <updated>2025-01-14T08:17:33.619Z</updated>
     
     
       
@@ -514,8 +474,6 @@
     
     
     
-    
-    <category term="2019" scheme="https://asdofe.github.io/tags/2019/"/>
     
     <category term="日本" scheme="https://asdofe.github.io/tags/%E6%97%A5%E6%9C%AC/"/>
     
@@ -536,7 +494,7 @@
     <link href="https://asdofe.github.io/2019/05/05/%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93Windows%E7%9A%84NIC%E5%90%8D%E7%A8%B1/"/>
     <id>https://asdofe.github.io/2019/05/05/%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93Windows%E7%9A%84NIC%E5%90%8D%E7%A8%B1/</id>
     <published>2019-05-05T10:57:40.000Z</published>
-    <updated>2024-01-28T10:37:41.272Z</updated>
+    <updated>2025-01-14T08:52:42.456Z</updated>
     
     
       
@@ -552,9 +510,9 @@
     
     <category term="windows" scheme="https://asdofe.github.io/tags/windows/"/>
     
-    <category term="develop" scheme="https://asdofe.github.io/tags/develop/"/>
+    <category term="開發" scheme="https://asdofe.github.io/tags/%E9%96%8B%E7%99%BC/"/>
     
-    <category term="network" scheme="https://asdofe.github.io/tags/network/"/>
+    <category term="note" scheme="https://asdofe.github.io/tags/note/"/>
     
   </entry>
   

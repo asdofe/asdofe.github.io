@@ -2,7 +2,7 @@
 title: 在Macbook Pro 14安裝Windows的虛擬機
 date: 2023-02-14 23:48:35
 tags:
-- macos
+- apple
 - arm64
 - windows
 ---

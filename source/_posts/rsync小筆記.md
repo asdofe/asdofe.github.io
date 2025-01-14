@@ -2,8 +2,8 @@
 title: rsync小筆記
 date: 2019-01-17 00:08:51
 tags:
-- rsync
-- develop
+- linux
+- 開發
 ---
 
 # RSYNC小筆記

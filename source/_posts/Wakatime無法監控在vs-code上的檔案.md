@@ -2,8 +2,7 @@
 title: Wakatime無法監控在vs code上的檔案
 date: 2020-06-05 18:39:36
 tags:
-    - wakatime
-    - vscode
+- vscode
 ---
 
 原因是因為wakatime無法紀錄用ip掛載的網路磁碟機底下的檔案，所以只需要給他一個domain name就可以了。

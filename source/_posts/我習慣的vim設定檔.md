@@ -3,12 +3,8 @@ title: 我習慣的vim設定檔
 date: 2019-01-17 00:07:04
 tags:
 - vim
-- develop
+- 開發
 - linux
-- putty
-- vundle
-- tmux
-- powerline
 ---
 
 ## 我真的不愛vim

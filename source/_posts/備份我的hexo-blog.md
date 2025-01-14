@@ -2,9 +2,7 @@
 title: 備份我的hexo blog
 date: 2018-11-22 01:36:54
 tags:
-- hexo
 - blog
-- backup
 ---
 
 hexo真的是很過分，我一直以為我deploy上github的東西，就是我當下資料夾的全部，仔細想想沒驗證就把東西毫不猶豫地git clean 真的是蠢到極點。

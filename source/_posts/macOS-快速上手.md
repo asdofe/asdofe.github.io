@@ -2,9 +2,9 @@
 title: macOS 快速上手
 date: 2022-06-22 22:04:46
 tags:
-- dev
-- macos
-- script
+- 開發
+- apple
+- note
 ---
 
 想看更新了什麼麻煩自己看git log惹

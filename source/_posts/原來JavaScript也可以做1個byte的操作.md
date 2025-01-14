@@ -2,10 +2,8 @@
 title: 原來JavaScript也可以做1個byte的操作
 date: 2018-11-28 01:07:40
 tags: 
-- JavaScript
-- Node
-- DataView
-- Typed Array
+- js
+- 開發
 ---
 
 最近有一些需要用利用強大的pc做簡單的binary decoder的需求。

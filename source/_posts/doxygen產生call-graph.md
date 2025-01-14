@@ -2,9 +2,7 @@
 title: doxygen產生call graph
 date: 2019-01-16 23:36:27
 tags:
-- doxygen
-- develop
-- software
+- 開發
 - c&c++
 ---
 當初trace code有點障礙，想要手動畫call graph，trace了幾行便想放棄，找找看有沒有什麼東西可以幫忙印call graph的。

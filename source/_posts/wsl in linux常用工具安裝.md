@@ -2,16 +2,9 @@
 title: wsl in linux 常用工具安裝
 date: 2020-06-04 14:42:39
 tags:
-	- linux
-	- develop
-	- zsh
-	- oh-my-zsh
-	- ssh
-	- git-cz
-	- ag
-	- tree
-	- tmux
-	- wsl
+- linux
+- 開發
+- note
 ---
 
 # 2020/7/19 

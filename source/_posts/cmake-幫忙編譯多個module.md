@@ -2,9 +2,8 @@
 title: cmake 幫忙編譯多個module
 date: 2019-01-16 23:50:05
 tags:
-- cmake
 - c&c++
-- develop
+- 開發
 ---
 
 # CMake幫忙一次編好一堆Module順便幫忙編好執行檔

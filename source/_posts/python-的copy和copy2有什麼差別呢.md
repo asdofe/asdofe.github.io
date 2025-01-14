@@ -3,7 +3,7 @@ title: python 的copy和copy2有什麼差別呢
 date: 2019-01-17 00:10:55
 tags:
 - python
-- develop
+- 開發
 ---
 
 # python 的copy和copy2有什麼差別呢

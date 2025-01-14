@@ -3,7 +3,6 @@ title: 在linux底下如何存取隨身碟呢
 date: 2019-01-17 00:09:49
 tags:
 - linux
-- usb
 ---
 在linux底下如何存取隨身碟呢
 

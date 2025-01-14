@@ -3,7 +3,7 @@ title: 用python幫忙壓zip檔
 date: 2019-01-16 23:48:51
 tags:
 - python
-- develop
+- 開發
 ---
 這裡要介紹Python shutil裡面的指令
 

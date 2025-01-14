@@ -2,9 +2,8 @@
 title: arch linux 進入bootloader之後完全沒有畫面
 date: 2019-01-17 00:14:08
 tags:
-- arch linux
-- driver
-- adapter
+- linux
+- 開發
 ---
 
 # arch linux no signal

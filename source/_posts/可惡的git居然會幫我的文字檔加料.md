@@ -3,7 +3,7 @@ title: 可惡的git居然會幫我的文字檔加料
 date: 2019-01-16 23:46:17
 tags:
 - git
-- development
+- 開發
 ---
 
 # 這篇是要說關於Git checkout style的問題

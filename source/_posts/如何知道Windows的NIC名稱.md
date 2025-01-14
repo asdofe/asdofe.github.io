@@ -2,9 +2,9 @@
 title: '如何知道Windows的NIC名稱'
 date: 2019-05-05 18:57:40
 tags:
-- develop
-- network
+- 開發
 - windows
+- note
 ---
 
 linux內有線網路的網卡名稱通常都會叫做eth0, eth1，但現在比較潮的命名方式是eth帶mac。

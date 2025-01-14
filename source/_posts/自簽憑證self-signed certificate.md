@@ -2,10 +2,8 @@
 title: 自簽憑證self-signed certificate
 date: 2020-07-17 11:06:39
 tags:
-	- linux
-	- develop
-	- openssl
-	- self-signed certificate
+- linux
+- 開發
 ---
 
 # 流程

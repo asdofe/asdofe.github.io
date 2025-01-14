@@ -2,9 +2,7 @@
 title: Macbook Pro 14 採購策略
 date: 2022-06-19 20:46:33
 tags:
-- review
 - apple
-- mac
 ---
 
 |項目|金額|

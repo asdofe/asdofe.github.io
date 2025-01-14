@@ -2,8 +2,7 @@
 title: 從gitbook搬家
 date: 2019-01-17 00:31:09
 tags:
-- gitbook
-- github
+- blog
 ---
 
 經歷了幾次大規模的倒站風暴，覺得只有把網誌存在自己家才有搞頭啊

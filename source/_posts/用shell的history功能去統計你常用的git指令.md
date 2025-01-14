@@ -3,7 +3,7 @@ title: 用shell的history功能去統計你常用的git指令
 date: 2019-01-16 23:51:21
 tags:
 - git
-- shell
+- note
 ---
 
 # 用shell script統計git 常用指令

@@ -3,8 +3,7 @@ title: git的partial add怎麼用
 date: 2019-01-17 00:11:58
 tags:
 - git
-- add
-- develop
+- 開發
 ---
 # Git一次add一行變更
 #### 我們在用git add的時候，不只可以add一個資料夾底下所有變更，也可以add一個檔案，最猛的是還可以一次只add一行，一次讓一個變更進去staging啊。最近才會用這個功能覺得實在是太厲害了。

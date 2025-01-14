@@ -2,10 +2,7 @@
 title: vdi檔太肥
 date: 2020-06-05 13:06:51
 tags:
-    - virtualbox
-    - vdi
-    - dd
-    - treesize
+- 開發
 ---
 
 C槽快爆了，想說用treesize掃一下看是什麼東西在作怪，結果一看居然是常用的虛擬機的vdi檔占了248 G，

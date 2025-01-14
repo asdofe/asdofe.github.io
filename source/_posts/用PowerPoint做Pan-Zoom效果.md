@@ -3,8 +3,6 @@ title: 用PowerPoint做Pan & Zoom效果
 date: 2019-01-16 23:44:41
 tags:
 - ppt
-- slide
-- present
 ---
 pan & zoom就是全景縮放，聽起來很炫，不過其實是在照片幻燈片很常使用的效果，就是照片慢慢變大(或變小)然後同時做平移這樣。這樣照片看起來比較不會那麼乾。
 

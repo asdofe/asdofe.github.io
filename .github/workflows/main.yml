@@ -1,5 +1,5 @@
-- name: Hexo GitHub Action
-  uses: yrpang/github-actions-hexo@v1.3
+name: Hexo GitHub Action
+uses: yrpang/github-actions-hexo@v1.3
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 # on: [push]

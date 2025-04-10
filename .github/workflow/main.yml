@@ -1,0 +1,2 @@
+- name: Hexo GitHub Action
+  uses: yrpang/github-actions-hexo@v1.3

@@ -3,17 +3,31 @@ name: Hexo Build and Deploy
 on: [push]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Cache node modules
-        uses: actions/cache@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: node_modules
-          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
-      - uses: yrpang/github-actions-hexo@v1.3
-        with:
-          deploykey: ${{secrets.DEPLOY_KEY}}
-          username: asdofe
-          email: asdofe@gmail.com
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate static files
+        run: npx hexo generate
+
+      - name: Deploy to GitHub Pages
+        env:
+          GIT_DEPLOY_TOKEN: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          git config --global user.name "asdofe"
+          git config --global user.email "asdofe"@gmail.com
+
+          # 修改 repo url 加入 token 做 auth
+          REPO_URL=https://x-access-token:${GIT_DEPLOY_TOKEN}@github.com/${{ github.repository }}.git
+          npx hexo deploy --repo "$REPO_URL"

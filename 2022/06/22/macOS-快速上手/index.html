@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="想看更新了什麼麻煩自己看git log惹https:&#x2F;&#x2F;github.com&#x2F;asdofe&#x2F;asdofe.github.io&#x2F;tree&#x2F;hexo2022&#x2F;12&#x2F;11 update. 第三方軟體和設定與快速鍵 有一些Windows設計比較好的 有一些是順手的設定  裝Homebrew 參考123&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS 快速上手">
+<meta property="og:url" content="https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="想看更新了什麼麻煩自己看git log惹https:&#x2F;&#x2F;github.com&#x2F;asdofe&#x2F;asdofe.github.io&#x2F;tree&#x2F;hexo2022&#x2F;12&#x2F;11 update. 第三方軟體和設定與快速鍵 有一些Windows設計比較好的 有一些是順手的設定  裝Homebrew 參考123&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-06-22T22:04:46.000Z">
+<meta property="article:modified_time" content="2026-02-01T09:45:02.746Z">
+<meta property="article:author" content="asdofe">
+<meta property="article:tag" content="apple">
+<meta property="article:tag" content="note">
+<meta property="article:tag" content="開發">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>macOS 快速上手</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="隨便說說" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2022/10/29/2022-%E9%97%9C%E8%A5%BF%E8%B3%9E%E6%A5%939%E5%A4%A98%E5%A4%9C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2022/06/19/Macbook-Pro-14%E6%8E%A1%E8%B3%BC%E7%AD%96%E7%95%A5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&text=macOS 快速上手"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&is_video=false&description=macOS 快速上手"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=macOS 快速上手&body=Check out this article: https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&name=macOS 快速上手&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&t=macOS 快速上手"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BB%9F%E9%AB%94%E5%92%8C%E8%A8%AD%E5%AE%9A%E8%88%87%E5%BF%AB%E9%80%9F%E9%8D%B5"><span class="toc-number">1.</span> <span class="toc-text">第三方軟體和設定與快速鍵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9DHomebrew"><span class="toc-number">1.1.</span> <span class="toc-text">裝Homebrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homebrew-CLI"><span class="toc-number">1.2.</span> <span class="toc-text">Homebrew CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homebrew-GUI"><span class="toc-number">1.3.</span> <span class="toc-text">Homebrew GUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%96%8B%E7%99%BC%E8%80%85%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.</span> <span class="toc-text">開發者工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%8D%B5"><span class="toc-number">1.5.</span> <span class="toc-text">快速鍵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#macOS%E9%A0%90%E8%A8%AD%E8%A8%AD%E5%AE%9A%E8%AA%BF%E6%95%B4"><span class="toc-number">1.6.</span> <span class="toc-text">macOS預設設定調整</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        macOS 快速上手
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">asdofe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-22T22:04:46.000Z" itemprop="datePublished">2022-06-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/apple/" rel="tag">apple</a>, <a class="tag-link-link" href="/tags/note/" rel="tag">note</a>, <a class="tag-link-link" href="/tags/%E9%96%8B%E7%99%BC/" rel="tag">開發</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>想看更新了什麼麻煩自己看git log惹<br><a target="_blank" rel="noopener" href="https://github.com/asdofe/asdofe.github.io/tree/hexo">https://github.com/asdofe/asdofe.github.io/tree/hexo</a><br>2022&#x2F;12&#x2F;11 update.</p>
+<h1 id="第三方軟體和設定與快速鍵"><a href="#第三方軟體和設定與快速鍵" class="headerlink" title="第三方軟體和設定與快速鍵"></a>第三方軟體和設定與快速鍵</h1><ul>
+<li>有一些Windows設計比較好的</li>
+<li>有一些是順手的設定</li>
+</ul>
+<h2 id="裝Homebrew"><a href="#裝Homebrew" class="headerlink" title="裝Homebrew"></a>裝Homebrew</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://brew.sh/index_zh-tw">參考</a><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br><span class="line">brew update</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Homebrew-CLI"><a href="#Homebrew-CLI" class="headerlink" title="Homebrew CLI"></a>Homebrew CLI</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">brew install bat</span><br><span class="line">brew install diff-so-fancy</span><br><span class="line">brew install fzf</span><br><span class="line">brew install ripgrep</span><br><span class="line">brew install thefuck</span><br><span class="line">brew install fd</span><br><span class="line">brew install navi</span><br><span class="line">brew install tig</span><br></pre></td></tr></table></figure>
+
+<h2 id="Homebrew-GUI"><a href="#Homebrew-GUI" class="headerlink" title="Homebrew GUI"></a>Homebrew GUI</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">brew install --cask alfred</span><br><span class="line">brew install --cask alt-tab</span><br><span class="line">brew install --cask appcleaner</span><br><span class="line">brew install --cask iterm2</span><br><span class="line">brew install --cask stats</span><br><span class="line">brew install --cask spotify</span><br><span class="line">brew install --cask microsoft-teams</span><br><span class="line">brew install --cask microsoft-edge</span><br><span class="line">brew install --cask calibre</span><br><span class="line">brew install --cask visual-studio-code</span><br><span class="line">brew install --cask vlc</span><br><span class="line">brew install --cask mcbopomofo</span><br><span class="line">brew install --cask aldente</span><br></pre></td></tr></table></figure>
+
+<h2 id="開發者工具"><a href="#開發者工具" class="headerlink" title="開發者工具"></a>開發者工具</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">nvm 連結</a></p>
+<ul>
+<li>聽說homebrew裝有坑，建議使用nvm官方安裝法<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash</span><br><span class="line">export NVM_DIR=&quot;$([ -z &quot;$&#123;XDG_CONFIG_HOME-&#125;&quot; ] &amp;&amp; printf %s &quot;$&#123;HOME&#125;/.nvm&quot; || printf %s &quot;$&#123;XDG_CONFIG_HOME&#125;/nvm&quot;)&quot;</span><br><span class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</span><br><span class="line"></span><br><span class="line">nvm install node</span><br><span class="line">nvm use node</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/rupa/z">z - jump around</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $&#123;ZDOTDIR:-$HOME&#125;</span><br><span class="line">git clone https://github.com/rupa/z.git</span><br><span class="line">echo &#x27;. z/z.sh&#x27; &gt;&gt; $&#123;ZDOTDIR:-$HOME&#125;/.zshrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ohmyz.sh/#install">oh my zsh</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md">z-syntax-highlighting</a></p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh">z-autosuggestions</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure></li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k#oh-my-zsh">powerlevel10k</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</span><br></pre></td></tr></table></figure></li>
+<li><p>改.zshrc</p>
+</li>
+<li><p>因為plugins需要改~&#x2F;.zshrc｀</p>
+<ul>
+<li>z-syntax-highlighting</li>
+<li>z-autosuggestions</li>
+<li>powerlevel10k</li>
+<li>有一行<code>plugins=</code>括號內加入<code>zsh-syntax-highlighting zsh-autosuggestions</code></li>
+<li>有一行<code>ZSH_THEME=</code>等號右邊改成<code>&quot;powerlevel10k/powerlevel10k&quot;</code></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/powerline/fonts#quick-installation">power line fonts</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">clone</span></span></span><br><span class="line">git clone https://github.com/powerline/fonts.git --depth=1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">install</span></span><br><span class="line">cd fonts</span><br><span class="line">./install.sh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">clean-up a bit</span></span><br><span class="line">cd ..</span><br><span class="line">rm -rf fonts</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>diff-so-fancy</p>
+<ul>
+<li>已經用Homebrew裝好了</li>
+<li>需要設定git global config</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.pager &quot;diff-so-fancy | less --tabs=4 -RFX&quot;</span><br><span class="line">git config --global interactive.diffFilter &quot;diff-so-fancy --patch&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>傳輸速度有夠慢不推 <del><a target="_blank" rel="noopener" href="https://github.com/telepresenceio/telepresence/issues/1654#issuecomment-873538291">macFUSE &amp; sshFS</a></del><ul>
+<li>會需要關機，再長按開機鍵，跳出安全選單，降低安全層級</li>
+<li>進到作業系統內後，mount到一半會需要再授權macFUSE的開發者</li>
+<li>mount point放在家目錄不用root權限</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">掛載指令</span></span><br><span class="line">sshfs -o allow_other,default_permissions &lt;remote site&gt;:&lt;remote directory path&gt; &lt;local directory path&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速鍵"><a href="#快速鍵" class="headerlink" title="快速鍵"></a>快速鍵</h2><ul>
+<li><p>全選 還原 剪下 複製 貼上：Command + a z x c v </p>
+</li>
+<li><p>截圖然後存進剪貼簿：Shift + Command + 3或4</p>
+</li>
+<li><p>螢幕錄影：Shift + Command + 5</p>
+</li>
+<li><p>切換輸入法：快速按一下 <code>Caps Lock</code> 或 Control + 空白鍵</p>
+</li>
+<li><p>預設英文大寫：長按<code>Caps Lock</code></p>
+</li>
+<li><p>游標跳字：Option + 左或右</p>
+</li>
+<li><p>游標選字：Option + Shift + 左或右</p>
+</li>
+<li><p>HOME鍵：Command + 左</p>
+</li>
+<li><p>END鍵：Command + 右</p>
+</li>
+<li><p>頁首：Command + 上</p>
+</li>
+<li><p>頁底：Command + 下</p>
+</li>
+<li><p>所有APP縮圖預覽：Control + 上</p>
+</li>
+<li><p>目前APP所有視窗預覽：Control + 下</p>
+</li>
+<li><p>目前APP所有視窗循序切換：Command + &#96;</p>
+</li>
+<li><p>Spotlight：Command + 空白鍵</p>
+</li>
+<li><p>大部分的分頁切換：Control + Tab</p>
+</li>
+<li><p>關閉程式：Command + q</p>
+</li>
+<li><p>關閉視窗：Ｃommand + shift + w</p>
+</li>
+<li><p>關閉分頁：Ｃommand + w</p>
+</li>
+<li><p>APP切換(很爛)：Command + Tab</p>
+</li>
+<li><p>APP切換(第三方AltTab提供)：Option + Tab</p>
+</li>
+<li><p>APP填滿畫面(第三方AltTab提供)：Command + Option + f</p>
+</li>
+<li><p>APP畫面縮小並做上下左右對齊(第三方Spectable)：Command + Option + 上下左右</p>
+</li>
+<li><p>鎖定畫面：Command + Control + q</p>
+</li>
+<li><p>縮小畫面：Command + h</p>
+</li>
+<li><p>隱藏&#x2F;顯示Dock：Command + Option + d</p>
+</li>
+<li><p>顯示Dock：滑鼠游標移到左下角</p>
+</li>
+<li><p>強制關閉程式：Command + Option + esc</p>
+</li>
+<li><p>快速鍵查詢：Command 長按</p>
+</li>
+<li><p>CLI 內的指令請用Control代替Windows 常用的Ctrl</p>
+</li>
+</ul>
+<h2 id="macOS預設設定調整"><a href="#macOS預設設定調整" class="headerlink" title="macOS預設設定調整"></a>macOS預設設定調整</h2><ol>
+<li>系統偏好設定 &gt; 觸碰式軌跡板<ul>
+<li>(分頁：點按) &gt; 點一下來選按 打勾</li>
+<li>(分頁：捲動與縮放)<ul>
+<li>捲動方向：自然 取消打勾</li>
+<li>智慧型縮放：取消打勾</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系統偏好設定 &gt; 鍵盤 &gt; (分頁：鍵盤) &gt; 快速鍵<ul>
+<li>將螢幕圖片儲存為檔案 和 拷貝螢幕圖片至剪貼板 的快速鍵 對調</li>
+<li>將所選區域的圖片儲存為檔案 和 拷貝所選區域的圖片至剪貼板 對調</li>
+</ul>
+</li>
+<li>系統偏好設定 &gt; 滑鼠<ul>
+<li>捲動方向：自然 取消打勾</li>
+<li>捲度速度：拉滿</li>
+</ul>
+</li>
+<li>系統偏好設定 &gt; 共享<ul>
+<li>電腦名稱：改個短一點的英文</li>
+</ul>
+</li>
+<li>系統偏好設定 &gt; 一般<ul>
+<li>外觀：深色</li>
+<li>預設網頁瀏覽器：Microsoft Edge</li>
+</ul>
+</li>
+<li>系統偏好設定 &gt; 輔助使用<ul>
+<li>動作 &gt; 指標控制 &gt; 觸控式軌跡版選項…: 啟用托移 取消打勾</li>
+</ul>
+</li>
+</ol>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>請開啟 JavaScript 功能來使用留言系統</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BB%9F%E9%AB%94%E5%92%8C%E8%A8%AD%E5%AE%9A%E8%88%87%E5%BF%AB%E9%80%9F%E9%8D%B5"><span class="toc-number">1.</span> <span class="toc-text">第三方軟體和設定與快速鍵</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9DHomebrew"><span class="toc-number">1.1.</span> <span class="toc-text">裝Homebrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homebrew-CLI"><span class="toc-number">1.2.</span> <span class="toc-text">Homebrew CLI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homebrew-GUI"><span class="toc-number">1.3.</span> <span class="toc-text">Homebrew GUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%96%8B%E7%99%BC%E8%80%85%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.</span> <span class="toc-text">開發者工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%8D%B5"><span class="toc-number">1.5.</span> <span class="toc-text">快速鍵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#macOS%E9%A0%90%E8%A8%AD%E8%A8%AD%E5%AE%9A%E8%AA%BF%E6%95%B4"><span class="toc-number">1.6.</span> <span class="toc-text">macOS預設設定調整</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&text=macOS 快速上手"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&is_video=false&description=macOS 快速上手"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=macOS 快速上手&body=Check out this article: https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&title=macOS 快速上手"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&name=macOS 快速上手&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2022/06/22/macOS-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/&t=macOS 快速上手"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    asdofe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2DXT2P7D0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-G2DXT2P7D0');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'asdofe';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

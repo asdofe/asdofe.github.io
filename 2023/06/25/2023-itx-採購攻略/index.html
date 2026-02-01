@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="2023-10-01 update補上cpu&#x2F;mb&#x2F;ram&#x2F;os&#x2F;bd  組了一台算是小時候夢想中的電腦吧，全部的零件幾乎都是一時之選了，自我實現的感覺真好 XD 顯卡本來是MSI Ventus 3X 4070 Ti但風扇全時異音太吵了換成Asus ProArt 4070Ti，結果ProArt高功率運轉有電流音，但不知道是Power還是顯卡的鍋，也懶得再去奔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023 itx 採購攻略">
+<meta property="og:url" content="https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="2023-10-01 update補上cpu&#x2F;mb&#x2F;ram&#x2F;os&#x2F;bd  組了一台算是小時候夢想中的電腦吧，全部的零件幾乎都是一時之選了，自我實現的感覺真好 XD 顯卡本來是MSI Ventus 3X 4070 Ti但風扇全時異音太吵了換成Asus ProArt 4070Ti，結果ProArt高功率運轉有電流音，但不知道是Power還是顯卡的鍋，也懶得再去奔">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-06-25T10:40:29.000Z">
+<meta property="article:modified_time" content="2026-02-01T09:45:02.746Z">
+<meta property="article:author" content="asdofe">
+<meta property="article:tag" content="windows">
+<meta property="article:tag" content="nvidia">
+<meta property="article:tag" content="intel">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2023 itx 採購攻略</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="隨便說說" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2023/12/23/2023-%E9%9F%93%E5%9C%8B%E6%BB%91%E9%9B%AA/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2023/02/14/%E5%9C%A8Macbook-Pro-14%E5%AE%89%E8%A3%9DWindows%E7%9A%84%E8%99%9B%E6%93%AC%E6%A9%9F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&text=2023 itx 採購攻略"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&is_video=false&description=2023 itx 採購攻略"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2023 itx 採購攻略&body=Check out this article: https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&name=2023 itx 採購攻略&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&t=2023 itx 採購攻略"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        2023 itx 採購攻略
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">asdofe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-25T10:40:29.000Z" itemprop="datePublished">2023-06-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/intel/" rel="tag">intel</a>, <a class="tag-link-link" href="/tags/nvidia/" rel="tag">nvidia</a>, <a class="tag-link-link" href="/tags/windows/" rel="tag">windows</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>2023-10-01 update補上cpu&#x2F;mb&#x2F;ram&#x2F;os&#x2F;bd</p>
+<ul>
+<li>組了一台算是小時候夢想中的電腦吧，全部的零件幾乎都是一時之選了，自我實現的感覺真好 XD</li>
+<li>顯卡本來是MSI Ventus 3X 4070 Ti但風扇全時異音太吵了換成Asus ProArt 4070Ti，結果ProArt高功率運轉有電流音，但不知道是Power還是顯卡的鍋，也懶得再去奔波了，itx認命，就這樣吧</li>
+<li>ram還遇到沒辦法超頻的問題，抱去現場bios更新一下就好了</li>
+<li>MSI的Lite Load懶人超頻真的是很神奇又方便，散熱算是還壓得住</li>
+<li>該死的海盜船SF750居然缺貨，只好買金鋼彈，還好用起來風扇也幾乎不太轉，讚讚</li>
+<li>新電腦真的好順暢啊，超越以前用過的任何一台，比M1 Pro的Macbook Pro還順暢，記憶體超頻與不超頻真的超級有感，以前DDR2升級DDR3完全無感，我還以為那些都已經效能過剩了XD</li>
+<li>機殼真的很小很讚，可以放進Osprey Farpoint 40L的背包</li>
+<li>組好之後夏特買了艾爾登法環，2個多月過去，有空的時間還是在打斯普拉遁，骨子裡其實只是想取得入場券，加入買遊戲的遊戲，哭啊</li>
+</ul>
+<p>2023-06-25 update</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>品名</th>
+<th>原價</th>
+<th>入手價</th>
+<th>折扣</th>
+<th>信用卡回饋</th>
+<th>折扣+信用卡回饋</th>
+<th>說明</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cpu</td>
+<td>Intel i5-13600K【14核&#x2F;20緒】3.5G(↑5.1G)&#x2F;24M&#x2F;UHD770&#x2F;無風扇&#x2F;125W【代理盒裝】</td>
+<td>9999</td>
+<td>9750</td>
+<td>0</td>
+<td>195</td>
+<td>195</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mb</td>
+<td>MSI微星 MPG Z790I EDGE WIFI ITX&#x2F;DDR5&#x2F;1700腳位&#x2F;主機板&#x2F;原價屋【回函送遊戲】</td>
+<td>10990</td>
+<td>10990</td>
+<td>0</td>
+<td>219.8</td>
+<td>219.8</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ram</td>
+<td>威剛 32GB(雙通16GB*2) DDR5 6000 XPG Lancer&#x2F;CL30 白【具XMP、EXPO參數】</td>
+<td>3299</td>
+<td>3299</td>
+<td>0</td>
+<td>65.9</td>
+<td>65.9</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>顯卡</td>
+<td>ASUS ProArt RTX 4070 Ti O12G 顯示卡</td>
+<td>29990</td>
+<td>27960</td>
+<td>2000</td>
+<td>1062.48</td>
+<td>3062.48</td>
+<td>蝦皮725 93折券</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ssd</td>
+<td>Solidgm P44 Pro @TB(Gen4 PCIex4)</td>
+<td>3999</td>
+<td>3999</td>
+<td>0</td>
+<td>79.98</td>
+<td>79.98</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>散熱</td>
+<td>Noctua貓頭鷹 NH-L9x65 高6.5cm&#x2F;下吹式&#x2F;六年保固&#x2F;散熱器&#x2F;原價屋</td>
+<td>1850</td>
+<td>1702</td>
+<td>148</td>
+<td>64.67</td>
+<td>212.67</td>
+<td>蝦皮625 92折券</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>電源</td>
+<td>全漢 金鋼彈 850W ATX3.0(Gen5) SFX</td>
+<td>4590</td>
+<td>4590</td>
+<td>0</td>
+<td>91.8</td>
+<td>91.8</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>機殼</td>
+<td>Fractal Design Terra 機殼 mITX 胡桃木 SFX-L&#x2F; SFX GPU 322mm 旗艦館</td>
+<td>6490</td>
+<td>6118</td>
+<td>372</td>
+<td>30.59</td>
+<td>402.59</td>
+<td>蝦皮618 93折券</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>機殼風扇</td>
+<td>Noctua貓頭鷹 NF-A12x25 PWM 12cm&#x2F;4-pin PWM&#x2F;防震靜音扇&#x2F;機殼風扇&#x2F;原價屋</td>
+<td>1185</td>
+<td>1090.2</td>
+<td>94.8</td>
+<td>41.42</td>
+<td>136.22</td>
+<td>蝦皮625 92折券</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>搖桿</td>
+<td>Microsoft微軟 Xbox 無線控制器 +無線轉接器 無線 藍牙 雙模組&#x2F;防滑握把&#x2F;人體工學&#x2F;搖桿&#x2F;手把&#x2F;原價屋</td>
+<td>1988</td>
+<td>1838</td>
+<td>150</td>
+<td>70.87</td>
+<td>220.87</td>
+<td>蝦皮優惠券100+原價屋50元折價券</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>光碟機</td>
+<td>LiteOn EB1 輕薄外接式DVD藍光燒錄器&#x2F;支援Mac</td>
+<td>2680</td>
+<td>2680</td>
+<td>0</td>
+<td>53.6</td>
+<td>53.6</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Windows 11中文家用彩盒(USB)</td>
+<td>4290</td>
+<td>4290</td>
+<td>0</td>
+<td>85.8</td>
+<td>85.8</td>
+<td>現場信用卡</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>總計</td>
+<td></td>
+<td>原價：81350</td>
+<td>入手價：78306.2</td>
+<td>折扣：2764.8</td>
+<td>信用卡回饋：2061.91</td>
+<td>折扣＋信用卡回饋：4826.71</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>請開啟 JavaScript 功能來使用留言系統</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&text=2023 itx 採購攻略"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&is_video=false&description=2023 itx 採購攻略"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2023 itx 採購攻略&body=Check out this article: https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&title=2023 itx 採購攻略"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&name=2023 itx 採購攻略&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2023/06/25/2023-itx-%E6%8E%A1%E8%B3%BC%E6%94%BB%E7%95%A5/&t=2023 itx 採購攻略"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    asdofe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2DXT2P7D0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-G2DXT2P7D0');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'asdofe';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

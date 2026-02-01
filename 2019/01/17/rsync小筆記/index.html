@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="RSYNC小筆記不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt; 被git帶壞用語都git化惹是說我覺得rsync跟本是git server的前身0.0 1. push檔案指令1rsyn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync小筆記">
+<meta property="og:url" content="https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="RSYNC小筆記不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt; 被git帶壞用語都git化惹是說我覺得rsync跟本是git server的前身0.0 1. push檔案指令1rsyn">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-01-17T00:08:51.000Z">
+<meta property="article:modified_time" content="2026-02-01T09:45:02.746Z">
+<meta property="article:author" content="asdofe">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="開發">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>rsync小筆記</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="隨便說說" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2019/01/17/%E5%9C%A8linux%E5%BA%95%E4%B8%8B%E5%A6%82%E4%BD%95%E5%AD%98%E5%8F%96%E9%9A%A8%E8%BA%AB%E7%A2%9F%E5%91%A2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2019/01/17/%E6%88%91%E7%BF%92%E6%85%A3%E7%9A%84vim%E8%A8%AD%E5%AE%9A%E6%AA%94/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&text=rsync小筆記"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&is_video=false&description=rsync小筆記"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=rsync小筆記&body=Check out this article: https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&name=rsync小筆記&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&t=rsync小筆記"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RSYNC%E5%B0%8F%E7%AD%86%E8%A8%98"><span class="toc-number">1.</span> <span class="toc-text">RSYNC小筆記</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E6%95%A2%E8%AA%AA%E6%98%AF%E6%95%99%E5%AD%B8%E5%95%A6%E5%9B%A0%E7%82%BARSYNC%E5%BE%9E%E8%A8%AD%E5%AE%9A%E6%AA%94%E9%96%8B%E5%A7%8B%E8%AC%9B%E8%B5%B7%E7%9C%9F%E7%9A%84%E6%98%AF%E5%A4%AA%E5%8F%AF%E6%80%95%E4%BA%86"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AC%9B%E7%B0%A1%E5%96%AERSYNC%E5%B0%B1%E6%98%AF%E3%84%A7%E5%80%8B%E5%8F%AF%E4%BB%A5%E5%B9%AB%E5%BF%99%E5%90%8C%E6%AD%A5%E6%AA%94%E6%A1%88%E7%9A%84%E8%BB%9F%E9%AB%94%EF%BC%8C%E8%80%8C%E4%B8%94%E6%9C%AC%E5%9C%B0%E7%AB%AF%E9%81%A0%E7%AB%AF%E9%83%BD%E5%8F%AF%E4%BB%A5%EF%BC%8C%E5%AE%83%E7%9A%84%E5%BC%B7%E9%A0%85%E6%98%AF%E5%8F%AF%E4%BB%A5%E5%B9%AB%E5%BF%99%E5%81%9A%E5%B7%AE%E7%95%B0%E5%90%8C%E6%AD%A5-%E9%80%9F%E5%BA%A6%E5%BF%AB%E4%B8%94%E7%9C%81%E9%A0%BB%E5%AF%AC-%EF%BC%8C%E8%AA%AA%E5%AE%83%E6%98%AFCP-DELUXE%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%95%8A-gt-x2F-x2F-x2F-lt"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A2%ABgit%E5%B8%B6%E5%A3%9E%E7%94%A8%E8%AA%9E%E9%83%BDgit%E5%8C%96%E6%83%B9"><span class="toc-number">1.1.</span> <span class="toc-text">被git帶壞用語都git化惹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-push%E6%AA%94%E6%A1%88%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. push檔案指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pull%E6%AA%94%E6%A1%88%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. pull檔案指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%81%B7%E7%9C%8B%E4%B8%80%E4%B8%8B%E9%81%A0%E7%AB%AF%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%95%A5-%E4%B8%8D%E6%98%AFfetch%E4%B8%8D%E8%A6%81%E4%BA%82%E6%90%9E%E5%95%8A%E9%AD%82%E6%B7%A1"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 偷看一下遠端上面有啥 (不是fetch不要亂搞啊魂淡)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E5%AF%86%E7%A2%BC%E6%AA%94%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">你的密碼檔路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E7%9A%84username"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">你的RSYNC的username :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84IP"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">你的IP :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E5%80%89%E5%BA%AB%E5%90%8D%E7%A8%B1"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">你的RSYNC倉庫名稱 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">你的RSYNC路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E8%A6%81%E5%90%8C%E6%AD%A5%E8%B3%87%E6%96%99%E5%A4%BE%E7%9A%84%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.6.</span> <span class="toc-text">你要同步資料夾的路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E8%A6%81%E5%90%8C%E6%AD%A5%E8%B3%87%E6%96%99%E5%A4%BE%E7%9A%84%E8%B7%AF%E5%BE%91%E7%9A%84PWD"><span class="toc-number">1.1.3.7.</span> <span class="toc-text">你要同步資料夾的路徑的PWD :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%93delete"><span class="toc-number">1.1.3.8.</span> <span class="toc-text">–delete :</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        rsync小筆記
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">asdofe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-17T00:08:51.000Z" itemprop="datePublished">2019-01-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/%E9%96%8B%E7%99%BC/" rel="tag">開發</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="RSYNC小筆記"><a href="#RSYNC小筆記" class="headerlink" title="RSYNC小筆記"></a>RSYNC小筆記</h1><h5 id="不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了"><a href="#不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了" class="headerlink" title="不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了"></a>不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了</h5><h5 id="講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步-速度快且省頻寬-，說它是CP-DELUXE也可以啊-gt-x2F-x2F-x2F-lt"><a href="#講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步-速度快且省頻寬-，說它是CP-DELUXE也可以啊-gt-x2F-x2F-x2F-lt" class="headerlink" title="講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt;"></a>講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt;</h5><hr>
+<h2 id="被git帶壞用語都git化惹"><a href="#被git帶壞用語都git化惹" class="headerlink" title="被git帶壞用語都git化惹"></a><del>被git帶壞用語都git化惹</del></h2><p>是說我覺得rsync跟本是git server的前身0.0</p>
+<h3 id="1-push檔案指令"><a href="#1-push檔案指令" class="headerlink" title="1. push檔案指令"></a>1. push檔案指令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --password-file=&lt;你的密碼檔路徑&gt; &lt;你要同步資料夾的路徑&gt; rsync://&lt;你的RSYNC的username&gt;@&lt;你的IP&gt;/&lt;你的RSYNC倉庫名稱&gt;</span><br></pre></td></tr></table></figure>
+<p>輸入完你的東西就會跑到rsync server的資料夾裡面</p>
+<h3 id="2-pull檔案指令"><a href="#2-pull檔案指令" class="headerlink" title="2. pull檔案指令"></a>2. pull檔案指令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --password-file=&lt;你的密碼檔路徑&gt; rsync://&lt;你的RSYNC的username&gt;@&lt;你的IP&gt;/&lt;你的RSYNC倉庫名稱&gt;/&lt;你的RSYNC路徑&gt; &lt;你要同步資料夾的路徑的PWD&gt;</span><br></pre></td></tr></table></figure>
+<p>輸入完rsync server底下指定的資料夾就會跑到你這裡來</p>
+<h3 id="3-偷看一下遠端上面有啥-不是fetch不要亂搞啊魂淡"><a href="#3-偷看一下遠端上面有啥-不是fetch不要亂搞啊魂淡" class="headerlink" title="3. 偷看一下遠端上面有啥 (不是fetch不要亂搞啊魂淡)"></a>3. 偷看一下遠端上面有啥 (<del>不是fetch不要亂搞啊魂淡</del>)</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --list-only --exclude=<span class="string">&#x27;/*/*/*/*&#x27;</span> --password-file=&lt;你的密碼檔路徑&gt; rsync://&lt;你的RSYNC的username&gt;@&lt;你的IP&gt;/&lt;你的RSYNC倉庫名稱&gt;/&lt;你的RSYNC路徑&gt; &lt;你要同步資料夾的路徑的PWD&gt;</span><br></pre></td></tr></table></figure>
+<p>有點像是pull，但是是dry run的概念，就是試看看rsync server上有什麼檔案可以拉。<br>但我多了一個指令，–exclude，這個可以幫你排除一堆不必要的檔案，但是他的邏輯很獵奇，它需要用絕對路徑<br>而且莫名其妙的是你看我這樣打，但是它其實會by pass&#x2F;*&#x2F;*&#x2F;*&#x2F;*&#x2F;*&#x2F;*，你叫他略過第4層但他會略過第6層的概念，我不知道到底是什麼神邏輯。</p>
+<hr>
+<p>簡單的說明一下上面一堆啊哩啊紮的是什麼鬼</p>
+<ul>
+<li><h4 id="你的密碼檔路徑"><a href="#你的密碼檔路徑" class="headerlink" title="你的密碼檔路徑 :"></a>你的密碼檔路徑 :</h4><p>顧名思義，就是把密碼打在裡面啊。要注意的是只要打密碼，因為server端的rsync.secrets<br>那個檔案的長相是&lt;帳號&gt;:&lt;密碼&gt;。但是這個password-file就是很單純，只要&lt;密碼&gt;。<br>ex : echo ‘0857957’ &gt; mypasswd 裡面的東西會跟mypasswd一樣<br>我一開始努力設法把secret檔搞得跟rsync.secret一樣帳號密碼龍喉伊啦結果在那邊授權失敗gy老半天啊QQ。<br>還有個小提醒就是密碼檔的使用權限只能是600也就是只有owner有rw權限其他全部吃屎的意思</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 600 mypasswd</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="你的RSYNC的username"><a href="#你的RSYNC的username" class="headerlink" title="你的RSYNC的username :"></a>你的RSYNC的username :</h4><p>長話短說就是你的&#x2F;etc&#x2F;rsync.conf<br>auth users的等號右邊的那個東西</p>
+</li>
+<li><h4 id="你的IP"><a href="#你的IP" class="headerlink" title="你的IP :"></a>你的IP :</h4><p>你的RSYNC那一台機器的位置要告訴人家啊不然怎麼連。</p>
+</li>
+<li><h4 id="你的RSYNC倉庫名稱"><a href="#你的RSYNC倉庫名稱" class="headerlink" title="你的RSYNC倉庫名稱 :"></a>你的RSYNC倉庫名稱 :</h4><p>長話短說就是你的&#x2F;etc&#x2F;rsync.conf中括號裡面的東西<br>ex : [share]。那你的RSYNC的倉庫名稱就叫做share。</p>
+</li>
+<li><h4 id="你的RSYNC路徑"><a href="#你的RSYNC路徑" class="headerlink" title="你的RSYNC路徑 :"></a>你的RSYNC路徑 :</h4><p>長話短說就是你的&#x2F;etc&#x2F;rsync.conf中<br>path的等號右邊的東西為根目錄，往下延伸出去的路徑</p>
+</li>
+<li><h4 id="你要同步資料夾的路徑"><a href="#你要同步資料夾的路徑" class="headerlink" title="你要同步資料夾的路徑 :"></a>你要同步資料夾的路徑 :</h4><p>就是看你資料夾要同步去哪個地方。</p>
+</li>
+<li><h4 id="你要同步資料夾的路徑的PWD"><a href="#你要同步資料夾的路徑的PWD" class="headerlink" title="你要同步資料夾的路徑的PWD :"></a>你要同步資料夾的路徑的PWD :</h4><p>講起來很隱晦，不過你用了就知道，反正就是假設要把&#x2F;home&#x2F;hmp&#x2F; 跟遠端做同步的話，那你這個就要設定&#x2F;home&#x2F;<br>(還是說你直接在&#x2F;home底下然後指定.&#x2F;也是可以辣)</p>
+</li>
+</ul>
+<p>想知道參數在幹嘛可以參考一下這一篇<br><a target="_blank" rel="noopener" href="http://blog.xuite.net/jyoutw/xtech/20025390">http://blog.xuite.net/jyoutw/xtech/20025390</a></p>
+<hr>
+<p>2017&#x2F;08&#x2F;03</p>
+<ul>
+<li><h4 id="–delete"><a href="#–delete" class="headerlink" title="–delete :"></a>–delete :</h4>這參數好棒啊! 只要加了它，如果你把檔案刪除遠端的檔案也會自動刪除喔! 資料夾簡直同步了呢!<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --delete --password-file=&lt;pwfile&gt; &lt;tmp_dir&gt; rsync://&lt;user&gt;@&lt;host&gt;/&lt;share&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>2017&#x2F;08&#x2F;31<br><del>我居然還會回來修改筆記內容我真的好棒棒呢</del><br>是說因為rsync一次更新都是更新一個路徑底下的所有東西<br>例如<br>我rsync的root設定在&#x2F;my-nas底下<br>底下有2包東西<br>&#x2F;my-nas&#x2F;a-project&#x2F;b-module<br>&#x2F;my-nas&#x2F;a-project&#x2F;c-module</p>
+<p>假設我現在rsync想要新增d-module會怎樣?<br>&#x2F;my-nas&#x2F;a-project&#x2F;d-module</p>
+<p>下了以下指令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --delete --password-file=secret /ny-nas/a-project/d-module rsync://user@192.168.1.1/my-nas</span><br></pre></td></tr></table></figure>
+<p>rsync會把&#x2F;my-nas&#x2F;a-project&#x2F;b-module和c-module整個刪掉啊<br>但這不是我要的啊!!!<br>所以要同步之前要先確認一下遠端有資料夾可以做局部更新</p>
+<p>所以要用2次rsync，第一次先長出資料夾，第二次再做同步<br>(你說可以分別有資料夾在遠端的一次rsync就好，沒資料的才用rsync做2次，好啦也是可以，但目前為求方便先一個吃全部case)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzlhP --password-file=secret /my-nas/a-project/d-module rsync://user@192.168.1.1/my-nas</span><br><span class="line"></span><br><span class="line">rsync -avzlhP --password-file=secret /my-nas/a-project/d-module/ rsync://user@192.168.1.1/my-nas/a-project/d-module</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ps:順便澄清一個概念好了，&#x2F;a&#x2F;b&#x2F;c &lt;-這個path是指c檔案，c檔案可以是資料夾也可以是檔案，端看os給他什麼屬性，而&#x2F;a&#x2F;b&#x2F;c&#x2F; &lt;-通常指的是c這個資料夾底下的東西。</p>
+<p>然而為什麼我要講這個呢？因為如果你用rsync上傳東西的資料夾寫&#x2F;a&#x2F;b&#x2F;c他會上傳整個c資料夾，&#x2F;a&#x2F;b&#x2F;c&#x2F;他只會上傳c資料夾底下的東西啊。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>請開啟 JavaScript 功能來使用留言系統</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RSYNC%E5%B0%8F%E7%AD%86%E8%A8%98"><span class="toc-number">1.</span> <span class="toc-text">RSYNC小筆記</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E6%95%A2%E8%AA%AA%E6%98%AF%E6%95%99%E5%AD%B8%E5%95%A6%E5%9B%A0%E7%82%BARSYNC%E5%BE%9E%E8%A8%AD%E5%AE%9A%E6%AA%94%E9%96%8B%E5%A7%8B%E8%AC%9B%E8%B5%B7%E7%9C%9F%E7%9A%84%E6%98%AF%E5%A4%AA%E5%8F%AF%E6%80%95%E4%BA%86"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">不敢說是教學啦因為RSYNC從設定檔開始講起真的是太可怕了</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AC%9B%E7%B0%A1%E5%96%AERSYNC%E5%B0%B1%E6%98%AF%E3%84%A7%E5%80%8B%E5%8F%AF%E4%BB%A5%E5%B9%AB%E5%BF%99%E5%90%8C%E6%AD%A5%E6%AA%94%E6%A1%88%E7%9A%84%E8%BB%9F%E9%AB%94%EF%BC%8C%E8%80%8C%E4%B8%94%E6%9C%AC%E5%9C%B0%E7%AB%AF%E9%81%A0%E7%AB%AF%E9%83%BD%E5%8F%AF%E4%BB%A5%EF%BC%8C%E5%AE%83%E7%9A%84%E5%BC%B7%E9%A0%85%E6%98%AF%E5%8F%AF%E4%BB%A5%E5%B9%AB%E5%BF%99%E5%81%9A%E5%B7%AE%E7%95%B0%E5%90%8C%E6%AD%A5-%E9%80%9F%E5%BA%A6%E5%BF%AB%E4%B8%94%E7%9C%81%E9%A0%BB%E5%AF%AC-%EF%BC%8C%E8%AA%AA%E5%AE%83%E6%98%AFCP-DELUXE%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%95%8A-gt-x2F-x2F-x2F-lt"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">講簡單RSYNC就是ㄧ個可以幫忙同步檔案的軟體，而且本地端遠端都可以，它的強項是可以幫忙做差異同步(速度快且省頻寬)，說它是CP DELUXE也可以啊 &gt;&#x2F;&#x2F;&#x2F;&lt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A2%ABgit%E5%B8%B6%E5%A3%9E%E7%94%A8%E8%AA%9E%E9%83%BDgit%E5%8C%96%E6%83%B9"><span class="toc-number">1.1.</span> <span class="toc-text">被git帶壞用語都git化惹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-push%E6%AA%94%E6%A1%88%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. push檔案指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pull%E6%AA%94%E6%A1%88%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. pull檔案指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%81%B7%E7%9C%8B%E4%B8%80%E4%B8%8B%E9%81%A0%E7%AB%AF%E4%B8%8A%E9%9D%A2%E6%9C%89%E5%95%A5-%E4%B8%8D%E6%98%AFfetch%E4%B8%8D%E8%A6%81%E4%BA%82%E6%90%9E%E5%95%8A%E9%AD%82%E6%B7%A1"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 偷看一下遠端上面有啥 (不是fetch不要亂搞啊魂淡)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E5%AF%86%E7%A2%BC%E6%AA%94%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">你的密碼檔路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E7%9A%84username"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">你的RSYNC的username :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84IP"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">你的IP :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E5%80%89%E5%BA%AB%E5%90%8D%E7%A8%B1"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">你的RSYNC倉庫名稱 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84RSYNC%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">你的RSYNC路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E8%A6%81%E5%90%8C%E6%AD%A5%E8%B3%87%E6%96%99%E5%A4%BE%E7%9A%84%E8%B7%AF%E5%BE%91"><span class="toc-number">1.1.3.6.</span> <span class="toc-text">你要同步資料夾的路徑 :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A0%E8%A6%81%E5%90%8C%E6%AD%A5%E8%B3%87%E6%96%99%E5%A4%BE%E7%9A%84%E8%B7%AF%E5%BE%91%E7%9A%84PWD"><span class="toc-number">1.1.3.7.</span> <span class="toc-text">你要同步資料夾的路徑的PWD :</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%93delete"><span class="toc-number">1.1.3.8.</span> <span class="toc-text">–delete :</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&text=rsync小筆記"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&is_video=false&description=rsync小筆記"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=rsync小筆記&body=Check out this article: https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&title=rsync小筆記"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&name=rsync小筆記&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/rsync%E5%B0%8F%E7%AD%86%E8%A8%98/&t=rsync小筆記"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    asdofe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2DXT2P7D0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-G2DXT2P7D0');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'asdofe';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

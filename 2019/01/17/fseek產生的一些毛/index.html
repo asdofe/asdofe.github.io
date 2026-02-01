@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="用C把檔案倒出來不要用”r” 請愛用”rb”由其是在Windows上面 問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了 以下錯誤示範 1234567FILE* fp &#x3D; foepn(my_file, &quot;r&quot;);fseek(fp, 0, SEEK_END);int file_len &#x3D; ftell(fp);char buf[10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fseek產生的一些毛">
+<meta property="og:url" content="https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/index.html">
+<meta property="og:site_name" content="隨便說說">
+<meta property="og:description" content="用C把檔案倒出來不要用”r” 請愛用”rb”由其是在Windows上面 問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了 以下錯誤示範 1234567FILE* fp &#x3D; foepn(my_file, &quot;r&quot;);fseek(fp, 0, SEEK_END);int file_len &#x3D; ftell(fp);char buf[10">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-01-17T00:13:00.000Z">
+<meta property="article:modified_time" content="2026-02-01T09:45:02.746Z">
+<meta property="article:author" content="asdofe">
+<meta property="article:tag" content="開發">
+<meta property="article:tag" content="c&amp;c++">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>fseek產生的一些毛</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="隨便說說" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇 " href="/2019/01/17/arch-linux-%E9%80%B2%E5%85%A5bootloader%E4%B9%8B%E5%BE%8C%E5%AE%8C%E5%85%A8%E6%B2%92%E6%9C%89%E7%95%AB%E9%9D%A2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇 " href="/2019/01/17/git%E7%9A%84partial-add%E6%80%8E%E9%BA%BC%E7%94%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="回到頁首 " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&text=fseek產生的一些毛"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&is_video=false&description=fseek產生的一些毛"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=fseek產生的一些毛&body=Check out this article: https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&name=fseek產生的一些毛&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&t=fseek產生的一些毛"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8C%E6%8A%8A%E6%AA%94%E6%A1%88%E5%80%92%E5%87%BA%E4%BE%86%E4%B8%8D%E8%A6%81%E7%94%A8%E2%80%9Dr%E2%80%9D-%E8%AB%8B%E6%84%9B%E7%94%A8%E2%80%9Drb%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">用C把檔案倒出來不要用”r” 請愛用”rb”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B1%E5%85%B6%E6%98%AF%E5%9C%A8Windows%E4%B8%8A%E9%9D%A2"><span class="toc-number"></span> <span class="toc-text">由其是在Windows上面</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        fseek產生的一些毛
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">asdofe</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-17T00:13:00.000Z" itemprop="datePublished">2019-01-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/c-c/" rel="tag">c&c++</a>, <a class="tag-link-link" href="/tags/%E9%96%8B%E7%99%BC/" rel="tag">開發</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="用C把檔案倒出來不要用”r”-請愛用”rb”"><a href="#用C把檔案倒出來不要用”r”-請愛用”rb”" class="headerlink" title="用C把檔案倒出來不要用”r” 請愛用”rb”"></a>用C把檔案倒出來不要用”r” 請愛用”rb”</h2><h1 id="由其是在Windows上面"><a href="#由其是在Windows上面" class="headerlink" title="由其是在Windows上面"></a>由其是在Windows上面</h1><hr>
+<p>問題來源是我打算用fread把我文字檔裡面的東西全部讀進記憶體裡面，所以就照著以下code這麼做了</p>
+<p>以下錯誤示範</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FILE* fp = foepn(my_file, &quot;r&quot;);</span><br><span class="line">fseek(fp, 0, SEEK_END);</span><br><span class="line">int file_len = ftell(fp);</span><br><span class="line">char buf[1000] = &#123;0&#125;;</span><br><span class="line">fread(buf, sizeof(char), file_len, fp);</span><br><span class="line">buf[file_len] = &#x27;\0&#x27;;</span><br><span class="line">printf(&quot;%s\n&quot;, buf);</span><br></pre></td></tr></table></figure>
+<p>如果有印出一些奇怪的東西應該還算正常</p>
+<p>根據我的實驗也不是每一個檔案都會出錯，但是特別容易在換行比較多的檔案上，所以合理懷疑戰犯就是OS幫我加料啦<br>真的是生77你沒事g婆3小，害我花超多時間debug到底是哪個環節出錯</p>
+<p>所以沒事不要用”r”請愛用”rb”(我真的是不知道”r”是設計來幹嘛的)</p>
+<hr>
+<p>後記：<a target="_blank" rel="noopener" href="https://www.securecoding.cert.org/confluence/display/c/FIO19-C.+Do+not+use+fseek%28%29+and+ftell%28%29+to+compute+the+size+of+a+regular+file">Coding Std</a> 這個文件雖然沒用到但是當做增廣見聞有病治病沒病強身啦。(這年頭工程師真的是知道越多寫code越抖越心虛QQ)</p>
+<p>ps:這篇打完才發現跟fseek一點關係也沒有阿，fseek只是non-portable而已並不是這篇文章的戰犯啦不好意思誤會一場，標題下得不好請多包涵QQ。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>請開啟 JavaScript 功能來使用留言系統</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8C%E6%8A%8A%E6%AA%94%E6%A1%88%E5%80%92%E5%87%BA%E4%BE%86%E4%B8%8D%E8%A6%81%E7%94%A8%E2%80%9Dr%E2%80%9D-%E8%AB%8B%E6%84%9B%E7%94%A8%E2%80%9Drb%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">用C把檔案倒出來不要用”r” 請愛用”rb”</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B1%E5%85%B6%E6%98%AF%E5%9C%A8Windows%E4%B8%8A%E9%9D%A2"><span class="toc-number"></span> <span class="toc-text">由其是在Windows上面</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&text=fseek產生的一些毛"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&is_video=false&description=fseek產生的一些毛"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=fseek產生的一些毛&body=Check out this article: https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&title=fseek產生的一些毛"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&name=fseek產生的一些毛&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://asdofe.github.io/2019/01/17/fseek%E7%94%A2%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%9B/&t=fseek產生的一些毛"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2026
+    asdofe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects_url">項目</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2DXT2P7D0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-G2DXT2P7D0');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'asdofe';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
